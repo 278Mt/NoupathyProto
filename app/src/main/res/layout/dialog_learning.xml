@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="wrap_content"
+                                             android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="785dp"
+            android:layout_height="469dp" app:srcCompat="@drawable/com_dialog_img"
+            android:id="@+id/imageView17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+            android:text="記録した脳波を学習します"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4" android:fontFamily="@font/noto_sans_bold"
+            android:textSize="23dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent" android:textAlignment="center" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView17" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:typeface="normal"
+            android:textColor="@color/peachy_pink"/>
+    <TextView
+            android:text="お疲れ様でした！\n学習に必要なデータが集まりました。\n下のボタンを押してデータを送信してください。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/learningDesc" android:textSize="20dp"
+            android:fontFamily="@font/noto_sans" android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/textView4" android:textAlignment="center"/>
+    <Button
+            android:layout_width="304dp"
+            android:layout_height="64dp"
+            android:id="@+id/lerningBtn"
+            android:visibility="visible"
+            android:background="@drawable/lrn_send_btn_set" app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            android:layout_marginBottom="50dp" app:layout_constraintBottom_toBottomOf="@+id/imageView17"/>
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/learningProgressPercent"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="@+id/imageView17"
+            android:layout_marginEnd="8dp" android:layout_marginTop="80dp"
+            app:layout_constraintTop_toBottomOf="@+id/learningDesc"/>
+    <TextView
+            android:text="----"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sending_text_label" app:layout_constraintEnd_toEndOf="@+id/learningProgressPercent"
+            app:layout_constraintStart_toStartOf="@+id/learningProgressPercent"
+            app:layout_constraintTop_toBottomOf="@+id/learningProgressPercent"
+            app:layout_constraintHorizontal_bias="0.497" android:textSize="20sp"
+            android:fontFamily="@font/roboto_medium" android:layout_marginTop="16dp"/>
+
+    <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="キャンセル"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+            app:layout_constraintEnd_toEndOf="@+id/imageView17"
+            app:layout_constraintHorizontal_bias="0.891"
+            app:layout_constraintStart_toEndOf="@+id/lerningBtn" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/rec_s3_2_img_on"/>
+    <item android:drawable="@drawable/rec_s3_2_img"/>
+</selector>

@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/arm64-v8a --target clean"
+  ],
+  "libraries": {
+    "noise_detector-Release-arm64-v8a": {
+      "artifactName": "noise_detector",
+      "buildCommand": "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/arm64-v8a --target noise_detector",
+      "abi": "arm64-v8a",
+      "output": "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/release/obj/arm64-v8a/libnoise_detector.so"
+    }
+  }
+}

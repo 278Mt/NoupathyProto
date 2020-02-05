@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:drawable="@color/peachy_pink"/>
+    <item
+            android:width="399dp"
+            android:height="27dp"
+            android:gravity="center">
+        <bitmap
+                android:src="@drawable/dsj_logo"/>
+    </item>
+</layer-list>

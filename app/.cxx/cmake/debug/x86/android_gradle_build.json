@@ -1,0 +1,38 @@
+
+{
+	"buildFiles" : [ "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/x86 --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"noise_detector-Debug-x86" : 
+		{
+			"abi" : "x86",
+			"artifactName" : "noise_detector",
+			"buildCommand" : "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/x86 --target noise_detector",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=i686-none-linux-android23 --gcc-toolchain=/Users/278mt/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/278mt/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dnoise_detector_EXPORTS -I../../../../src/main/cpp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/main/cpp/noise_detector.cpp",
+					"workingDirectory" : "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/x86"
+				}
+			],
+			"output" : "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/debug/obj/x86/libnoise_detector.so",
+			"toolchain" : "5213142436867989991"
+		}
+	},
+	"toolchains" : 
+	{
+		"5213142436867989991" : 
+		{
+			"cCompilerExecutable" : "/Users/278mt/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/278mt/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+		}
+	}
+}
