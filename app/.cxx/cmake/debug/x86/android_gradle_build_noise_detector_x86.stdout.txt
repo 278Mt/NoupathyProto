@@ -1,1 +1,2 @@
-ninja: no work to do.
+[1/2] Building CXX object CMakeFiles/noise_detector.dir/app/src/main/cpp/noise_detector.cpp.o
+[2/2] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/x86/libnoise_detector.so

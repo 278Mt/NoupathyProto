@@ -30,7 +30,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/debug/java;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/release/kotlin;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/release/java;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/debugAndroidTest/kotlin;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/debugUnitTest/kotlin;/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/src/releaseUnitTest/kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/debug/java;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/release/kotlin;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/release/java;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/debugAndroidTest/kotlin;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/debugUnitTest/kotlin;/Users/278mt/Desktop/dsj/noupathy/npq/app/src/releaseUnitTest/kotlin">
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/debug" />

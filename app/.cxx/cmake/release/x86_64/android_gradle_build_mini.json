@@ -1,16 +1,16 @@
 {
   "buildFiles": [
-    "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/CMakeLists.txt"
+    "/Users/278mt/Desktop/dsj/noupathy/npq/CMakeLists.txt"
   ],
   "cleanCommands": [
-    "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/x86_64 --target clean"
+    "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/npq/app/.cxx/cmake/release/x86_64 --target clean"
   ],
   "libraries": {
     "noise_detector-Release-x86_64": {
       "artifactName": "noise_detector",
-      "buildCommand": "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/x86_64 --target noise_detector",
+      "buildCommand": "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/npq/app/.cxx/cmake/release/x86_64 --target noise_detector",
       "abi": "x86_64",
-      "output": "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/release/obj/x86_64/libnoise_detector.so"
+      "output": "/Users/278mt/Desktop/dsj/noupathy/npq/app/build/intermediates/cmake/release/obj/x86_64/libnoise_detector.so"
     }
   }
 }

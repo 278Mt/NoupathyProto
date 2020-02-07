@@ -42,7 +42,7 @@ rule CXX_SHARED_LIBRARY_LINKER__noise_detector
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -H/Users/278mt/Desktop/dsj/noupathy/NoupathyProto -B/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/x86
+  command = /Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -H/Users/278mt/Desktop/dsj/noupathy/npq -B/Users/278mt/Desktop/dsj/noupathy/npq/app/.cxx/cmake/debug/x86
   description = Re-running CMake...
   generator = 1
 
