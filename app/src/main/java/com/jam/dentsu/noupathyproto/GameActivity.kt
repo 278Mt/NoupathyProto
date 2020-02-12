@@ -497,11 +497,11 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
 
         when (soundSetID) {
             1-> {
-                sound1 = sp.load(this, R.raw.s1, 1)
-                sound2 = sp.load(this, R.raw.s2, 1)
-                sound3 = sp.load(this, R.raw.s3, 1)
-                sound4 = sp.load(this, R.raw.s4, 1)
-                sound5 = sp.load(this, R.raw.s5, 1)
+                sound1 = sp.load(this, R.raw.s1_1, 1)
+                sound2 = sp.load(this, R.raw.s1_2, 1)
+                sound3 = sp.load(this, R.raw.s1_3, 1)
+                sound4 = sp.load(this, R.raw.s1_4, 1)
+                sound5 = sp.load(this, R.raw.s1_5, 1)
             }
             2-> {
                 sound1 = sp.load(this, R.raw.s2_1, 1)

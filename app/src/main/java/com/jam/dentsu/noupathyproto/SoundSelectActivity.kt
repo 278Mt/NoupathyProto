@@ -11,23 +11,7 @@ import kotlinx.android.synthetic.main.activity_sound_select.*
 class SoundSelectActivity : AppCompatActivity() {
 
     private lateinit var sp: SoundPool
-    private var s1_1 = 0
-    private var s1_2 = 0
-    private var s1_3 = 0
-    private var s1_4 = 0
-    private var s1_5 = 0
-
-    private var s2_1 = 0
-    private var s2_2 = 0
-    private var s2_3 = 0
-    private var s2_4 = 0
-    private var s2_5 = 0
-
-    private var s3_1 = 0
-    private var s3_2 = 0
-    private var s3_3 = 0
-    private var s3_4 = 0
-    private var s3_5 = 0
+    private var sArray = arrayOf(arrayOf(0, 0, 0, 0, 0), arrayOf(0, 0, 0, 0, 0), arrayOf(0, 0, 0, 0, 0))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,23 +58,25 @@ class SoundSelectActivity : AppCompatActivity() {
             finish()
         }
 
-        sound1_1.setOnClickListener { sp.play(s1_1, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound1_2.setOnClickListener { sp.play(s1_2, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound1_3.setOnClickListener { sp.play(s1_3, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound1_4.setOnClickListener { sp.play(s1_4, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound1_5.setOnClickListener { sp.play(s1_5, 1.0f, 1.0f, 0, 0, 1.0f) }
+        println("sound1_1 = ${sound1_1}")
 
-        sound2_1.setOnClickListener { sp.play(s2_1, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound2_2.setOnClickListener { sp.play(s2_2, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound2_3.setOnClickListener { sp.play(s2_3, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound2_4.setOnClickListener { sp.play(s2_4, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound2_5.setOnClickListener { sp.play(s2_5, 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound1_1.setOnClickListener { sp.play(sArray[0][0], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound1_2.setOnClickListener { sp.play(sArray[0][1], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound1_3.setOnClickListener { sp.play(sArray[0][2], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound1_4.setOnClickListener { sp.play(sArray[0][3], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound1_5.setOnClickListener { sp.play(sArray[0][4], 1.0f, 1.0f, 0, 0, 1.0f) }
 
-        sound3_1.setOnClickListener { sp.play(s3_1, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound3_2.setOnClickListener { sp.play(s3_2, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound3_3.setOnClickListener { sp.play(s3_3, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound3_4.setOnClickListener { sp.play(s3_4, 1.0f, 1.0f, 0, 0, 1.0f) }
-        sound3_5.setOnClickListener { sp.play(s3_5, 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound2_1.setOnClickListener { sp.play(sArray[1][0], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound2_2.setOnClickListener { sp.play(sArray[1][1], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound2_3.setOnClickListener { sp.play(sArray[1][2], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound2_4.setOnClickListener { sp.play(sArray[1][3], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound2_5.setOnClickListener { sp.play(sArray[1][4], 1.0f, 1.0f, 0, 0, 1.0f) }
+
+        sound3_1.setOnClickListener { sp.play(sArray[2][0], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound3_2.setOnClickListener { sp.play(sArray[2][1], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound3_3.setOnClickListener { sp.play(sArray[2][2], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound3_4.setOnClickListener { sp.play(sArray[2][3], 1.0f, 1.0f, 0, 0, 1.0f) }
+        sound3_5.setOnClickListener { sp.play(sArray[2][4], 1.0f, 1.0f, 0, 0, 1.0f) }
     }
 
     private fun regardingSoundBtn(row: Int, col: Int) {
@@ -111,24 +97,24 @@ class SoundSelectActivity : AppCompatActivity() {
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(5)
             .build()
+        
+        sArray[0][0] = sp.load(this, R.raw.s1_1, 1)
+        sArray[0][1] = sp.load(this, R.raw.s1_2, 1)
+        sArray[0][2] = sp.load(this, R.raw.s1_3, 1)
+        sArray[0][3] = sp.load(this, R.raw.s1_4, 1)
+        sArray[0][4] = sp.load(this, R.raw.s1_5, 1)
 
-        s1_1 = sp.load(this, R.raw.s1, 1)
-        s1_2 = sp.load(this, R.raw.s2, 1)
-        s1_3 = sp.load(this, R.raw.s3, 1)
-        s1_4 = sp.load(this, R.raw.s4, 1)
-        s1_5 = sp.load(this, R.raw.s5, 1)
+        sArray[1][0] = sp.load(this, R.raw.s2_1, 1)
+        sArray[1][1] = sp.load(this, R.raw.s2_2, 1)
+        sArray[1][2] = sp.load(this, R.raw.s2_3, 1)
+        sArray[1][3] = sp.load(this, R.raw.s2_4, 1)
+        sArray[1][4] = sp.load(this, R.raw.s2_5, 1)
 
-        s2_1 = sp.load(this, R.raw.s2_1, 1)
-        s2_2 = sp.load(this, R.raw.s2_2, 1)
-        s2_3 = sp.load(this, R.raw.s2_3, 1)
-        s2_4 = sp.load(this, R.raw.s2_4, 1)
-        s2_5 = sp.load(this, R.raw.s2_5, 1)
-
-        s3_1 = sp.load(this, R.raw.s3_1, 1)
-        s3_2 = sp.load(this, R.raw.s3_2, 1)
-        s3_3 = sp.load(this, R.raw.s3_3, 1)
-        s3_4 = sp.load(this, R.raw.s3_4, 1)
-        s3_5 = sp.load(this, R.raw.s3_5, 1)
+        sArray[2][0] = sp.load(this, R.raw.s3_1, 1)
+        sArray[2][1] = sp.load(this, R.raw.s3_2, 1)
+        sArray[2][2] = sp.load(this, R.raw.s3_3, 1)
+        sArray[2][3] = sp.load(this, R.raw.s3_4, 1)
+        sArray[2][4] = sp.load(this, R.raw.s3_5, 1)
 
     }
 }
