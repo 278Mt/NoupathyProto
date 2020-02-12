@@ -5,27 +5,47 @@
   },
   {
     "level": "INFO",
-    "message": "rebuilding JSON /Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/android_gradle_build.json due to:"
+    "message": "No CMake version was specified in build.gradle. Choosing a suitable version."
   },
   {
     "level": "INFO",
-    "message": "- force flag, will remove stale json folder"
+    "message": "Trying to locate CMake in local SDK repository."
   },
   {
     "level": "INFO",
-    "message": "removing stale contents from \u0027/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\u0027"
+    "message": "- CMake found in SDK at \u0027/Users/278mt/Library/Android/sdk/cmake/3.6.4111459\u0027 had version \u00273.6.0\u0027"
   },
   {
     "level": "INFO",
-    "message": "created folder \u0027/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\u0027"
+    "message": "rebuilding JSON /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/android_gradle_build.json due to:"
   },
   {
     "level": "INFO",
-    "message": "executing cmake Executable : /Users/dsj/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto\n-B/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/build/intermediates/cmake/release/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DANDROID_NDK\u003d/Users/dsj/Library/Android/sdk/ndk/20.0.5594570\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/dsj/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/dsj/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+    "message": "- command changed from previous, will remove stale json folder"
   },
   {
     "level": "INFO",
-    "message": "Executable : /Users/dsj/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto\n-B/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/build/intermediates/cmake/release/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DANDROID_NDK\u003d/Users/dsj/Library/Android/sdk/ndk/20.0.5594570\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/dsj/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/dsj/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+    "message": "- a dependent build file changed"
+  },
+  {
+    "level": "INFO",
+    "message": "  - /Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/CMakeLists.txt"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\u0027"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\u0027"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/278mt/Desktop/dsj/noupathy/NoupathyProto\n-B/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/release/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DANDROID_NDK\u003d/Users/278mt/Library/Android/sdk/ndk-bundle\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/278mt/Library/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+  },
+  {
+    "level": "INFO",
+    "message": "Executable : /Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/278mt/Desktop/dsj/noupathy/NoupathyProto\n-B/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/release/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DANDROID_NDK\u003d/Users/278mt/Library/Android/sdk/ndk-bundle\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/278mt/Library/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
   },
   {
     "level": "INFO",
@@ -33,11 +53,11 @@
   },
   {
     "level": "INFO",
-    "message": "write build output /Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/build_output.txt"
+    "message": "write build output /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/build_output.txt"
   },
   {
     "level": "INFO",
-    "message": "write command file /Users/dsj/Documents/DSJ/3_ALS/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/build_command.txt"
+    "message": "write command file /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/release/armeabi-v7a/build_command.txt"
   },
   {
     "level": "INFO",

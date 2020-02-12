@@ -15,8 +15,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".SoundSelectActivity"
+        <activity
+                android:name=".SoundSelectActivity"
                   android:screenOrientation="landscape">
+        </activity>
+        <activity
+                android:name=".PostSoundSelectActivity"
+                android:screenOrientation="landscape">
         </activity>
         <activity
                 android:name=".DatasetActivity"

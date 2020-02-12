@@ -38,6 +38,24 @@ class SoundSelectActivity : AppCompatActivity() {
         val currentDataset = intent.getStringExtra("currentDataset")
         val result = Intent()
 
+        soundBtn1_1.setOnClickListener { regardingSoundBtn(1, 1) }
+        soundBtn1_2.setOnClickListener { regardingSoundBtn(1, 2) }
+        soundBtn1_3.setOnClickListener { regardingSoundBtn(1, 3) }
+        soundBtn1_4.setOnClickListener { regardingSoundBtn(1, 4) }
+        soundBtn1_5.setOnClickListener { regardingSoundBtn(1, 5) }
+
+        soundBtn2_1.setOnClickListener { regardingSoundBtn(2, 1) }
+        soundBtn2_2.setOnClickListener { regardingSoundBtn(2, 2) }
+        soundBtn2_3.setOnClickListener { regardingSoundBtn(2, 3) }
+        soundBtn2_4.setOnClickListener { regardingSoundBtn(2, 4) }
+        soundBtn2_5.setOnClickListener { regardingSoundBtn(2, 5) }
+
+        soundBtn3_1.setOnClickListener { regardingSoundBtn(3, 1) }
+        soundBtn3_2.setOnClickListener { regardingSoundBtn(3, 2) }
+        soundBtn3_3.setOnClickListener { regardingSoundBtn(3, 3) }
+        soundBtn3_4.setOnClickListener { regardingSoundBtn(3, 4) }
+        soundBtn3_5.setOnClickListener { regardingSoundBtn(3, 5) }
+
         use1.setOnClickListener {
             setSoundSetID(currentDataset, 1)
             setResult(Activity.RESULT_OK, result)
@@ -73,6 +91,13 @@ class SoundSelectActivity : AppCompatActivity() {
         sound3_3.setOnClickListener { sp.play(s3_3, 1.0f, 1.0f, 0, 0, 1.0f) }
         sound3_4.setOnClickListener { sp.play(s3_4, 1.0f, 1.0f, 0, 0, 1.0f) }
         sound3_5.setOnClickListener { sp.play(s3_5, 1.0f, 1.0f, 0, 0, 1.0f) }
+    }
+
+    private fun regardingSoundBtn(row: Int, col: Int) {
+        val intent = Intent(this, PostSoundSelectActivity::class.java)
+        intent.putExtra("soundNumArray", arrayOf<Int>(row, col))
+        println(intent.getIntArrayExtra("soundNumArray"))
+        startActivityForResult(intent, 1)
     }
 
     private fun loadSounds() {

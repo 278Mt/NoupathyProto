@@ -1,5 +1,5 @@
 {
-  "ndkFolder": "/Users/dsj/Library/Android/sdk/ndk/20.0.5594570",
+  "ndkFolder": "/Users/278mt/Library/Android/sdk/ndk-bundle",
   "messages": [
     {
       "level": "INFO",
@@ -15,19 +15,15 @@
     },
     {
       "level": "INFO",
-      "message": "sdkFolder is /Users/dsj/Library/Android/sdk"
+      "message": "sdkFolder is /Users/278mt/Library/Android/sdk"
     },
     {
       "level": "INFO",
-      "message": "Considering /Users/dsj/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder"
+      "message": "Considering /Users/278mt/Library/Android/sdk/ndk-bundle in SDK ndk-bundle folder"
     },
     {
       "level": "INFO",
-      "message": "Considering /Users/dsj/Library/Android/sdk/ndk/20.0.5594570 in SDK ndk folder"
-    },
-    {
-      "level": "INFO",
-      "message": "No user requested version, choosing /Users/dsj/Library/Android/sdk/ndk/20.0.5594570 which is version 20.0.5594570"
+      "message": "No user requested version, choosing /Users/278mt/Library/Android/sdk/ndk-bundle which is version 20.0.5594570"
     }
   ]
 }

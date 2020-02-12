@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SoundSelectActivity" android:background="@color/peachy_pink">
@@ -100,24 +100,176 @@
             android:background="@drawable/snd_use_btn_set"
             android:layout_marginBottom="27dp" app:layout_constraintBottom_toBottomOf="@+id/imageView29"
             app:layout_constraintStart_toStartOf="@+id/imageView29" android:layout_marginStart="21dp"/>
+
     <Button
+            android:id="@+id/soundBtn1_1"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound1_1"
+            app:layout_constraintEnd_toEndOf="@+id/sound1_1"
+            app:layout_constraintStart_toStartOf="@+id/sound1_1" />
+
+    <Button
+            android:id="@+id/soundBtn1_2"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound1_2"
+            app:layout_constraintEnd_toEndOf="@+id/sound1_2"
+            app:layout_constraintStart_toStartOf="@+id/sound1_2" />
+
+    <Button
+            android:id="@+id/soundBtn1_3"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound1_3"
+            app:layout_constraintEnd_toEndOf="@+id/sound1_3"
+            app:layout_constraintStart_toStartOf="@+id/sound1_3" />
+
+    <Button
+            android:id="@+id/soundBtn1_4"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound1_4"
+            app:layout_constraintEnd_toEndOf="@+id/sound1_4"
+            app:layout_constraintStart_toStartOf="@+id/sound1_4" />
+
+    <Button
+            android:id="@+id/soundBtn1_5"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound1_5"
+            app:layout_constraintEnd_toEndOf="@+id/sound1_5"
+            app:layout_constraintStart_toStartOf="@+id/sound1_5" />
+
+    <Button
+            android:id="@+id/soundBtn2_1"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound2_1"
+            app:layout_constraintEnd_toEndOf="@+id/sound2_1"
+            app:layout_constraintStart_toStartOf="@+id/sound2_1" />
+
+    <Button
+            android:id="@+id/soundBtn2_2"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound2_2"
+            app:layout_constraintEnd_toEndOf="@+id/sound2_2"
+            app:layout_constraintStart_toStartOf="@+id/sound2_2" />
+
+    <Button
+            android:id="@+id/soundBtn2_3"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound2_3"
+            app:layout_constraintEnd_toEndOf="@+id/sound2_3"
+            app:layout_constraintStart_toStartOf="@+id/sound2_3" />
+
+    <Button
+            android:id="@+id/soundBtn2_4"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound2_4"
+            app:layout_constraintEnd_toEndOf="@+id/sound2_4"
+            app:layout_constraintStart_toStartOf="@+id/sound2_4" />
+
+    <Button
+            android:id="@+id/soundBtn2_5"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound2_5"
+            app:layout_constraintEnd_toEndOf="@+id/sound2_5"
+            app:layout_constraintStart_toStartOf="@+id/sound2_5" />
+
+    <Button
+            android:id="@+id/soundBtn3_1"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound3_1"
+            app:layout_constraintEnd_toEndOf="@+id/sound3_1"
+            app:layout_constraintStart_toStartOf="@+id/sound3_1" />
+
+    <Button
+            android:id="@+id/soundBtn3_2"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound3_2"
+            app:layout_constraintEnd_toEndOf="@+id/sound3_2"
+            app:layout_constraintStart_toStartOf="@+id/sound3_2" />
+
+    <Button
+            android:id="@+id/soundBtn3_3"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound3_3"
+            app:layout_constraintEnd_toEndOf="@+id/sound3_3"
+            app:layout_constraintStart_toStartOf="@+id/sound3_3" />
+
+    <Button
+            android:id="@+id/soundBtn3_4"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound3_4"
+            app:layout_constraintEnd_toEndOf="@+id/sound3_4"
+            app:layout_constraintStart_toStartOf="@+id/sound3_4" />
+
+    <Button
+            android:id="@+id/soundBtn3_5"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            android:background="@drawable/com_sound_btn_set"
+            app:layout_constraintBottom_toTopOf="@+id/sound3_5"
+            app:layout_constraintEnd_toEndOf="@+id/sound3_5"
+            app:layout_constraintStart_toStartOf="@+id/sound3_5" />
+
+    <Button
+            android:id="@+id/sound1_1"
             android:layout_width="88dp"
             android:layout_height="88dp"
-            android:id="@+id/sound1_1"
-            app:layout_constraintBottom_toBottomOf="@+id/use1" app:layout_constraintStart_toEndOf="@+id/use1"
-            android:layout_marginStart="28dp" android:background="@drawable/snd_s1_1_img_set"/>
+            android:layout_marginStart="28dp"
+            android:background="@drawable/snd_s1_1_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/use1"
+            app:layout_constraintStart_toEndOf="@+id/use1" />
+
+    <Button
+            android:id="@+id/sound1_2"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/snd_s1_2_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/sound1_1"
+            app:layout_constraintStart_toEndOf="@+id/sound1_1" />
+
     <Button
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:id="@+id/sound1_3"
             app:layout_constraintBottom_toBottomOf="@+id/sound1_2" app:layout_constraintStart_toEndOf="@+id/sound1_2"
             android:layout_marginStart="16dp" android:background="@drawable/snd_s1_3_img_set"/>
+
     <Button
+            android:id="@+id/sound1_4"
             android:layout_width="88dp"
             android:layout_height="88dp"
-            android:id="@+id/sound1_2"
-            app:layout_constraintBottom_toBottomOf="@+id/sound1_1" app:layout_constraintStart_toEndOf="@+id/sound1_1"
-            android:layout_marginStart="16dp" android:background="@drawable/snd_s1_2_img_set"/>
+            android:layout_marginStart="16dp"
+            android:background="@drawable/snd_s1_4_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/sound1_3"
+            app:layout_constraintStart_toEndOf="@+id/sound1_3" />
+
     <Button
             android:layout_width="88dp"
             android:layout_height="88dp"
@@ -130,12 +282,25 @@
             android:id="@+id/sound2_1"
             app:layout_constraintBottom_toBottomOf="@+id/use2" app:layout_constraintStart_toEndOf="@+id/use2"
             android:layout_marginStart="28dp" android:background="@drawable/snd_s2_1_img_set"/>
+
     <Button
+            android:id="@+id/sound2_2"
             android:layout_width="88dp"
             android:layout_height="88dp"
-            android:id="@+id/sound1_4"
-            app:layout_constraintBottom_toBottomOf="@+id/sound1_3" app:layout_constraintStart_toEndOf="@+id/sound1_3"
-            android:layout_marginStart="16dp" android:background="@drawable/snd_s1_4_img_set"/>
+            android:layout_marginStart="16dp"
+            android:background="@drawable/snd_s2_2_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/sound2_1"
+            app:layout_constraintStart_toEndOf="@+id/sound2_1" />
+
+    <Button
+            android:id="@+id/sound2_3"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/snd_s2_3_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/sound2_2"
+            app:layout_constraintStart_toEndOf="@+id/sound2_2" />
+
     <Button
             android:layout_width="88dp"
             android:layout_height="88dp"
@@ -148,12 +313,7 @@
             android:id="@+id/sound2_5"
             app:layout_constraintBottom_toBottomOf="@+id/sound2_4" app:layout_constraintStart_toEndOf="@+id/sound2_4"
             android:layout_marginStart="16dp" android:background="@drawable/snd_s2_5_img_set"/>
-    <Button
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:id="@+id/sound2_2"
-            app:layout_constraintBottom_toBottomOf="@+id/sound2_1" app:layout_constraintStart_toEndOf="@+id/sound2_1"
-            android:layout_marginStart="16dp" android:background="@drawable/snd_s2_2_img_set"/>
+
     <Button
             android:layout_width="88dp"
             android:layout_height="88dp"
@@ -172,18 +332,15 @@
             android:id="@+id/sound3_3"
             app:layout_constraintBottom_toBottomOf="@+id/sound3_2" app:layout_constraintStart_toEndOf="@+id/sound3_2"
             android:layout_marginStart="16dp" android:background="@drawable/snd_s3_3_img_set"/>
+
     <Button
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:id="@+id/sound2_3"
-            app:layout_constraintBottom_toBottomOf="@+id/sound2_2" app:layout_constraintStart_toEndOf="@+id/sound2_2"
-            android:layout_marginStart="16dp" android:background="@drawable/snd_s2_3_img_set"/>
-    <Button
-            android:layout_width="88dp"
-            android:layout_height="88dp"
             android:id="@+id/sound3_5"
-            app:layout_constraintBottom_toBottomOf="@+id/sound3_4" app:layout_constraintStart_toEndOf="@+id/sound3_4"
-            android:layout_marginStart="16dp" android:background="@drawable/snd_s3_5_img_set"/>
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/snd_s3_5_img_set"
+            app:layout_constraintBottom_toBottomOf="@+id/sound3_4"
+            app:layout_constraintStart_toEndOf="@+id/sound3_4" />
     <Button
             android:layout_width="88dp"
             android:layout_height="88dp"
