@@ -187,18 +187,10 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     handler.postDelayed(this, 5000)
                 }
                 else if (setCount <= SetSize) {
-                    println("set: " + setCount)
+                    println("set: ${setCount}")
                     isSoundArrayPlaying=true
                     currentSound = playList[0].toString()
-                    println("sound: " + currentSound)
-
-//                    when(currentSound) {
-//                        "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "2" -> sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "3" -> sp.play(sound3, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "4" -> sp.play(sound4, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "5" -> sp.play(sound5, 1.0f, 1.0f, 0, 0, 1.0f)
-//                    }
+                    println("sound: ${currentSound}")
 
                     //反応によって音量を変える
                     when (currentSound) {
@@ -291,8 +283,8 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
             val time = Date()
             val file_format = SimpleDateFormat("yyyyMMdd_HHmmss_", Locale.getDefault())
             val fileTime = file_format.format(time)
-            currentFileName = fileTime + currentTarget + "_play.csv"
-            val fw = FileWriter(Environment.getExternalStorageDirectory().getPath() + "/Noupathy/" + currentDataset + "/" + currentFileName)
+            currentFileName = "${fileTime}${currentTarget}_play.csv"
+            val fw = FileWriter("${Environment.getExternalStorageDirectory().getPath()}/Noupathy/${currentDataset}/${currentFileName}")
             pw = PrintWriter(BufferedWriter(fw))
             pw?.print("Timestamp,Ch1,Ch2,Sound\n")
 
@@ -344,7 +336,7 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
         if (isRecording) {
 
             val time = Date()
-            pw?.print(format.format(time) + "," + ch1 + "," + ch2 + "," + currentSound + "\n")
+            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
             val receivedSound = currentSound
             if(receivedSound!="") {
                 ground_ch1.removeAt(0)
@@ -376,7 +368,7 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     }
 
                     if (stim_counts[i] == p300Point) {
-                        Log.d("eeg_level",i.toString()+","+ch1.toString()+","+ch2.toString())
+                        Log.d("eeg_level", "${i},${ch1},${ch2}")
                         v_argt_ch1[receivedSound.toInt()-1].add(ch1)
                         v_argt_ch2[receivedSound.toInt()-1].add(ch2)
 
@@ -391,7 +383,7 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     }
 
                     if (stim_counts[i] == n200Point) {
-                        Log.d("eeg_level",i.toString()+","+ch1.toString()+","+ch2.toString())
+                        Log.d("eeg_level", "${i},${ch1},${ch2}")
                         v_argt_ch1[receivedSound.toInt()-1].add(ch1)
                         v_argt_ch2[receivedSound.toInt()-1].add(ch2)
 
@@ -610,7 +602,7 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
             }
         }
         val speakLbl = inflater.findViewById<TextView>(R.id.speak)
-        speakLbl.text = "「" + words[resultData.select - 1] + "」"
+        speakLbl.text = "「${words[resultData.select - 1]}」"
 
         val select1 = inflater.findViewById<ImageView>(R.id.select1)
         val select2 = inflater.findViewById<ImageView>(R.id.select2)
@@ -721,14 +713,14 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
         val inflater = this.layoutInflater.inflate(R.layout.dialog_wordedit, null, false)
         val okBtn = inflater.findViewById<Button>(R.id.wordSetBtn)
         val desc = inflater.findViewById<TextView>(R.id.wordDesc)
-        desc.text = num.toString() + "が選択された時の言葉を設定します"
+        desc.text = "${num}が選択された時の言葉を設定します"
         val field = inflater.findViewById<EditText>(R.id.wordTxt)
         field.setText(word)
 
         wordEditDialog = AlertDialog.Builder(this).apply {
             setView(inflater)
             okBtn.setOnClickListener {
-                pref.edit().putString("word"+num.toString(), field.text.toString()).apply()
+                pref.edit().putString("word${num}", field.text.toString()).apply()
                 setWords()
                 setClassLimit()
                 wordEditDialog!!.dismiss()
@@ -820,25 +812,25 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
 
         when (soundSetID) {
             1-> {
-                sound1 = sp.load(this, R.raw.s1_1, 1)
-                sound2 = sp.load(this, R.raw.s1_2, 1)
-                sound3 = sp.load(this, R.raw.s1_3, 1)
-                sound4 = sp.load(this, R.raw.s1_4, 1)
-                sound5 = sp.load(this, R.raw.s1_5, 1)
+                sound1 = sp.load(this, R.raw.s0_0, 1)
+                sound2 = sp.load(this, R.raw.s0_1, 1)
+                sound3 = sp.load(this, R.raw.s0_2, 1)
+                sound4 = sp.load(this, R.raw.s0_3, 1)
+                sound5 = sp.load(this, R.raw.s0_4, 1)
             }
             2-> {
-                sound1 = sp.load(this, R.raw.s2_1, 1)
-                sound2 = sp.load(this, R.raw.s2_2, 1)
-                sound3 = sp.load(this, R.raw.s2_3, 1)
-                sound4 = sp.load(this, R.raw.s2_4, 1)
-                sound5 = sp.load(this, R.raw.s2_5, 1)
+                sound1 = sp.load(this, R.raw.s1_0, 1)
+                sound2 = sp.load(this, R.raw.s1_1, 1)
+                sound3 = sp.load(this, R.raw.s1_2, 1)
+                sound4 = sp.load(this, R.raw.s1_3, 1)
+                sound5 = sp.load(this, R.raw.s1_4, 1)
             }
             3-> {
-                sound1 = sp.load(this, R.raw.s3_1, 1)
-                sound2 = sp.load(this, R.raw.s3_2, 1)
-                sound3 = sp.load(this, R.raw.s3_3, 1)
-                sound4 = sp.load(this, R.raw.s3_4, 1)
-                sound5 = sp.load(this, R.raw.s3_5, 1)
+                sound1 = sp.load(this, R.raw.s2_0, 1)
+                sound2 = sp.load(this, R.raw.s2_1, 1)
+                sound3 = sp.load(this, R.raw.s2_2, 1)
+                sound4 = sp.load(this, R.raw.s2_3, 1)
+                sound5 = sp.load(this, R.raw.s2_4, 1)
             }
         }
         sound5000 = sp.load(this, R.raw.s5000, 1)

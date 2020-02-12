@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         pref = getSharedPreferences("prefs", AppCompatActivity.MODE_PRIVATE)
 
         val id = pref.getString("user_id", "000003")
-        idText.text = "User id: " + id
+        idText.text = "User id: ${id}"
 
         idSetBtn.setOnClickListener {
 
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 val id = idBox.getText().toString()
                 if (id.length > 3) {
                     pref.edit().putString("user_id", id).apply()
-                    idText.text = "User id: " + id
+                    idText.text = "User id: ${id}"
                 } else {
                     Toast.makeText(this, "idは4文字以上で設定してください", Toast.LENGTH_SHORT).show()
                 }

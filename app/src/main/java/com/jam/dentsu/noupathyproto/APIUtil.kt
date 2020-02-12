@@ -46,12 +46,12 @@ fun httpGet(url: String): InputStream? {
 //学習精度取得
 fun getAccuracy(dir: String, matrix_size: Int): String {
 
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
     val json = JSONObject(data)
-    val acc = json.getString("acc"+matrix_size.toString()).toDouble()
+    val acc = json.getString("acc${matrix_size}").toDouble()
     val per = DecimalFormat("##0.00%")
 
     return per.format(acc)
@@ -59,7 +59,7 @@ fun getAccuracy(dir: String, matrix_size: Int): String {
 
 //P300出現ポイント取得
 fun getP300Time(dir: String): Double{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -73,7 +73,7 @@ fun getP300Time(dir: String): Double{
 
 //N200出現ポイント取得
 fun getN200Time(dir: String): Double{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -87,7 +87,7 @@ fun getN200Time(dir: String): Double{
 
 //P300強度取得
 fun getP300Voltage(dir: String): Double{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -101,7 +101,7 @@ fun getP300Voltage(dir: String): Double{
 
 //N200強度取得
 fun getN200Voltage(dir: String): Double{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -115,7 +115,7 @@ fun getN200Voltage(dir: String): Double{
 
 fun saveLearningData(dir: String, data: String) {
 
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val writer = BufferedWriter(FileWriter(file))
     writer.use {
         it.write(data)
@@ -124,7 +124,7 @@ fun saveLearningData(dir: String, data: String) {
 }
 
 fun loadClfData(dir: String?): String{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -134,7 +134,7 @@ fun loadClfData(dir: String?): String{
 }
 
 fun loadStepIndexData(dir: String?): String{
-    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
+    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -175,7 +175,7 @@ fun PostDataToServer(json: JSONObject){
     val handler = Handler()
     val jsonString = json.toString()
     val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonString)
-    val request = Request.Builder().url(server_url+"/storing").post(postBody).build()
+    val request = Request.Builder().url("${server_url}/storing").post(postBody).build()
     val client = OkHttpClient.Builder()
         .connectTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
@@ -209,7 +209,7 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
     private var sound_set_id: Int = sound
 
     override fun loadInBackground(): String? {
-        val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + current_dir + "/"
+        val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${current_dir}/"
         val dir = File(path)
         val files = dir.list()
         var keys = mutableListOf<String>()
@@ -244,30 +244,30 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
             //脳波データの送信
             for(ch_num in listOf("1","2")){
                 val json = JSONObject()
-                json.put("key","Ch"+ch_num+"_" + iteration_tag + "_" + target_tag)
-                val raw: List<Int>? = raw_data["ch"+ch_num]
+                json.put("key","Ch${ch_num}_${iteration_tag}_${target_tag}")
+                val raw: List<Int>? = raw_data["ch${ch_num}"]
                 json.put("data", JSONArray(raw))
                 json.put("soundset",sound_set_id)
                 json.put("id",sub_id)
-                Log.d("http3", "ch"+ch_num+"_" + iteration_tag + "_" + target_tag)
+                Log.d("http3", "ch${ch_num}_${iteration_tag}_${target_tag}")
                 PostDataToServer(json)
-                keys.add("Ch"+ch_num+"_"+iteration_tag+ "_" + target_tag)
+                keys.add("Ch${ch_num}_${iteration_tag}_${target_tag}")
                 sent_file_count+=1
                 learning_progress_percent = sent_file_count.toDouble()/learning_file_total.toDouble()*100
-                Log.d("http3", learning_progress_percent.toString()+","+sent_file_count.toString()+","+learning_file_total.toString())
+                Log.d("http3", "${learning_progress_percent},${sent_file_count},${learning_file_total}")
             }
 
             //被験者id, サウンドラベルの送信
             val json = JSONObject()
-            json.put("key", "SelectMusic_"+iteration_tag+ "_" + target_tag)
+            json.put("key", "SelectMusic_${iteration_tag}_${target_tag}")
             json.put("data", JSONArray(selectMusic))
-            json.put("soundset",sound_set_id)
+            json.put("soundset", sound_set_id)
             json.put("id", sub_id)
-            Log.d("http3", "SelectMusic_"+iteration_tag+ "_" + target_tag)
+            Log.d("http3", "SelectMusic_${iteration_tag}_${target_tag}")
             PostDataToServer(json)
 
             repCount[target_tag.toInt() - 1] = repCount[target_tag.toInt() - 1] + 1
-            keys.add("SelectMusic_"+iteration_tag+ "_" + target_tag)
+            keys.add("SelectMusic_${iteration_tag}_${target_tag}")
             sent_file_count+=1
             learning_progress_percent =sent_file_count.toDouble()/learning_file_total.toDouble()*100
         }
@@ -283,7 +283,7 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
         val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
             jsonString)
 
-        val learning_request = Request.Builder().url(server_url+"/learning").post(postBody).build()
+        val learning_request = Request.Builder().url("${server_url}/learning").post(postBody).build()
 
         val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -311,7 +311,7 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
 
         Log.i("toridge.okhttp3", "これから学習リクエスト")
 
-        val request = Request.Builder().url(server_url+"/get-learning-result").post(postBody).build()
+        val request = Request.Builder().url("${server_url}/get-learning-result").post(postBody).build()
 
         var response_flag = false
         while(response_flag==false) {
@@ -400,7 +400,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         }
 
         // 学習データ読み込み
-        val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + current_dir + "/"
+        val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${current_dir}/"
         val dir = File(path)
         Log.i("toridge.okhttp3", "これから読み込み")
 
@@ -422,7 +422,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         Log.i("toridge.okhttp3", "これからリクエスト")
 
         val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString())
-        val request = Request.Builder().url(server_url+"/predicting").post(postBody).build()
+        val request = Request.Builder().url("${server_url}/predicting").post(postBody).build()
 
         val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -511,7 +511,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         }
 
         result.select = result.per_d.indexOf(result.per_d.max())+1
-        println("result: " + result)
+        println("result: ${result}")
 
         return result
     }

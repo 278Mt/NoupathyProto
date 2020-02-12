@@ -116,10 +116,10 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     handler.postDelayed(this, 5000)
                 }
                 else if (setCount <= SetSize) {
-                    println("set: " + setCount)
+                    println("set: ${setCount}")
                     isSoundArrayPlaying=true
                     currentSound = playList[0].toString()
-                    println("sound: " + currentSound)
+                    println("sound: ${currentSound}")
                     when(currentSound) {
                         "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
                         "2" -> sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -236,7 +236,7 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                         count_text.text = "左右から選ぶボックスを決めて下さい"
                     }
                     else if(5 >= pre_trial_count && pre_trial_count > 0) {
-                        count_text.text = "次の脳波計測開始まで、あと" + pre_trial_count.toString() + "秒"
+                        count_text.text = "次の脳波計測開始まで、あと${pre_trial_count}秒"
                         sp.play(count_sound, 1.0f, 1.0f, 0, 0, 1.0f)
                     }
 
@@ -284,7 +284,7 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
         if (isRecording) {
 
             val time = Date()
-            pw?.print(format.format(time) + "," + ch1 + "," + ch2 + "," + currentSound + "\n")
+            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
         }
     }
 
@@ -432,16 +432,16 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
 
     private fun setEnemy(){
         if(enemyListLeft[10-leftTrialTime].contains(".")){
-            left_point.text = "ポイント"+enemyListLeft[10 - leftTrialTime] + "倍"
+            left_point.text = "ポイント${enemyListLeft[10 - leftTrialTime]}倍"
         }
         else {
-            left_point.text = enemyListLeft[10 - leftTrialTime] + "ポイント"
+            left_point.text = "${enemyListLeft[10 - leftTrialTime]}ポイント"
         }
         if(enemyListRight[10-leftTrialTime].contains(".")){
-            right_point.text = "ポイント"+enemyListRight[10 - leftTrialTime] + "倍"
+            right_point.text = "ポイント${enemyListRight[10 - leftTrialTime]}倍"
         }
         else {
-            right_point.text = enemyListRight[10 - leftTrialTime] + "ポイント"
+            right_point.text = "${enemyListRight[10 - leftTrialTime]}ポイント"
         }
     }
 
@@ -497,25 +497,26 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
 
         when (soundSetID) {
             1-> {
-                sound1 = sp.load(this, R.raw.s1_1, 1)
-                sound2 = sp.load(this, R.raw.s1_2, 1)
-                sound3 = sp.load(this, R.raw.s1_3, 1)
-                sound4 = sp.load(this, R.raw.s1_4, 1)
-                sound5 = sp.load(this, R.raw.s1_5, 1)
+                sound1 = sp.load(this, R.raw.s0_0, 1)
+                sound2 = sp.load(this, R.raw.s0_1, 1)
+                sound3 = sp.load(this, R.raw.s0_2, 1)
+                sound4 = sp.load(this, R.raw.s0_3, 1)
+                sound5 = sp.load(this, R.raw.s0_4, 1)
             }
             2-> {
-                sound1 = sp.load(this, R.raw.s2_1, 1)
-                sound2 = sp.load(this, R.raw.s2_2, 1)
-                sound3 = sp.load(this, R.raw.s2_3, 1)
-                sound4 = sp.load(this, R.raw.s2_4, 1)
-                sound5 = sp.load(this, R.raw.s2_5, 1)
+                sound1 = sp.load(this, R.raw.s1_0, 1)
+                sound2 = sp.load(this, R.raw.s1_1, 1)
+                sound3 = sp.load(this, R.raw.s1_2, 1)
+                sound4 = sp.load(this, R.raw.s1_3, 1)
+                sound5 = sp.load(this, R.raw.s1_4, 1)
             }
             3-> {
-                sound1 = sp.load(this, R.raw.s3_1, 1)
-                sound2 = sp.load(this, R.raw.s3_2, 1)
-                sound3 = sp.load(this, R.raw.s3_3, 1)
-                sound4 = sp.load(this, R.raw.s3_4, 1)
-                sound5 = sp.load(this, R.raw.s3_5, 1)
+
+                sound1 = sp.load(this, R.raw.s2_0, 1)
+                sound2 = sp.load(this, R.raw.s2_1, 1)
+                sound3 = sp.load(this, R.raw.s2_2, 1)
+                sound4 = sp.load(this, R.raw.s2_3, 1)
+                sound5 = sp.load(this, R.raw.s2_4, 1)
             }
         }
         sound5000 = sp.load(this, R.raw.s5000, 1)

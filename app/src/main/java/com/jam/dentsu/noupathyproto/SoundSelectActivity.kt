@@ -98,23 +98,23 @@ class SoundSelectActivity : AppCompatActivity() {
             .setMaxStreams(5)
             .build()
 
-        sArray[0][0] = sp.load(this, R.raw.s1_1, 1)
-        sArray[0][1] = sp.load(this, R.raw.s1_2, 1)
-        sArray[0][2] = sp.load(this, R.raw.s1_3, 1)
-        sArray[0][3] = sp.load(this, R.raw.s1_4, 1)
-        sArray[0][4] = sp.load(this, R.raw.s1_5, 1)
+        sArray[0][0] = sp.load(this, R.raw.s0_0, 1)
+        sArray[0][1] = sp.load(this, R.raw.s0_1, 1)
+        sArray[0][2] = sp.load(this, R.raw.s0_2, 1)
+        sArray[0][3] = sp.load(this, R.raw.s0_3, 1)
+        sArray[0][4] = sp.load(this, R.raw.s0_4, 1)
 
-        sArray[1][0] = sp.load(this, R.raw.s2_1, 1)
-        sArray[1][1] = sp.load(this, R.raw.s2_2, 1)
-        sArray[1][2] = sp.load(this, R.raw.s2_3, 1)
-        sArray[1][3] = sp.load(this, R.raw.s2_4, 1)
-        sArray[1][4] = sp.load(this, R.raw.s2_5, 1)
+        sArray[1][0] = sp.load(this, R.raw.s1_0, 1)
+        sArray[1][1] = sp.load(this, R.raw.s1_1, 1)
+        sArray[1][2] = sp.load(this, R.raw.s1_2, 1)
+        sArray[1][3] = sp.load(this, R.raw.s1_3, 1)
+        sArray[1][4] = sp.load(this, R.raw.s1_4, 1)
 
-        sArray[2][0] = sp.load(this, R.raw.s3_1, 1)
-        sArray[2][1] = sp.load(this, R.raw.s3_2, 1)
-        sArray[2][2] = sp.load(this, R.raw.s3_3, 1)
-        sArray[2][3] = sp.load(this, R.raw.s3_4, 1)
-        sArray[2][4] = sp.load(this, R.raw.s3_5, 1)
+        sArray[2][0] = sp.load(this, R.raw.s2_0, 1)
+        sArray[2][1] = sp.load(this, R.raw.s2_1, 1)
+        sArray[2][2] = sp.load(this, R.raw.s2_2, 1)
+        sArray[2][3] = sp.load(this, R.raw.s2_3, 1)
+        sArray[2][4] = sp.load(this, R.raw.s2_4, 1)
 
     }
 }

@@ -195,7 +195,6 @@ class neuroNicleService private constructor(context: Context) {
                                     if (i == 3) { // CRD_PUD2_PCDT
                                         try {
                                             val bit = Integer.parseInt(arr[i],16)
-                                            // println( "BinaryString: " + getByteBinaryStr(bytes[3]))
 
                                             if (bit == 56) {
                                                 neuroNicleService.instance.isFitting = true
@@ -232,8 +231,6 @@ class neuroNicleService private constructor(context: Context) {
                                             _curt1 = Integer.parseInt(arr[i], 16)
                                             ch1 = _curt1 + _prev1
 
-                                            //println("ch1: " + ch1)
-
                                             if (neuroNicleService.instance.isFitting && neuroNicleService.instance.calibTime > 0) {
                                                 calib_count++
                                                 if (calib_count % 250 == 0) {
@@ -254,8 +251,6 @@ class neuroNicleService private constructor(context: Context) {
                                             prev2 = 0
                                             _curt2 = Integer.parseInt(arr[i], 16)
                                             ch2 = _curt2 + _prev2
-
-                                            //println("ch2: " + ch2)
 
                                             if(listener != null) {
                                                 // 値を通知

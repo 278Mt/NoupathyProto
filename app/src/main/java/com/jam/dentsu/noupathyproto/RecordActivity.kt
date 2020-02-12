@@ -186,10 +186,10 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
                     nowPlaying("0", nowPlayingImage!!, playerProgress!!)
                     handler.postDelayed(this, 5000)
                 } else if (setCount <= SetSize) {
-                    println("set: " + setCount)
+                    println("set: ${setCount}")
                     isSoundArrayPlaying = true
                     currentSound = playList[0].toString()
-                    println("sound: " + currentSound)
+                    println("sound: ${currentSound}")
 
 //                    when (currentSound) {
 //                        "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -303,9 +303,9 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
             val time = Date()
             val file_format = SimpleDateFormat("yyyyMMdd_HHmmss_", Locale.getDefault())
             val fileTime = file_format.format(time)
-            currentFileName = fileTime + currentTarget + ".csv"
+            currentFileName = "${fileTime}${currentTarget}.csv"
             val fw =
-                FileWriter(Environment.getExternalStorageDirectory().getPath() + "/Noupathy/" + currentDataset + "/" + currentFileName)
+                FileWriter("${Environment.getExternalStorageDirectory().getPath()}/Noupathy/${currentDataset}/${currentFileName}")
             pw = PrintWriter(BufferedWriter(fw))
             pw?.print("Timestamp,Ch1,Ch2,Sound\n")
 
@@ -354,7 +354,7 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
         if (isRecording) {
 
             val time = Date()
-            pw?.print(format.format(time) + "," + ch1 + "," + ch2 + "," + currentSound + "\n")
+            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
             if(currentSound!="") {
                 ground_ch1.removeAt(0)
                 ground_ch2.removeAt(0)
@@ -684,25 +684,25 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
         when (soundSetID) {
             1 -> {
-                sound1 = sp.load(this, R.raw.s1_1, 1)
-                sound2 = sp.load(this, R.raw.s1_2, 1)
-                sound3 = sp.load(this, R.raw.s1_3, 1)
-                sound4 = sp.load(this, R.raw.s1_4, 1)
-                sound5 = sp.load(this, R.raw.s1_5, 1)
+                sound1 = sp.load(this, R.raw.s0_0, 1)
+                sound2 = sp.load(this, R.raw.s0_1, 1)
+                sound3 = sp.load(this, R.raw.s0_2, 1)
+                sound4 = sp.load(this, R.raw.s0_3, 1)
+                sound5 = sp.load(this, R.raw.s0_4, 1)
             }
             2 -> {
-                sound1 = sp.load(this, R.raw.s2_1, 1)
-                sound2 = sp.load(this, R.raw.s2_2, 1)
-                sound3 = sp.load(this, R.raw.s2_3, 1)
-                sound4 = sp.load(this, R.raw.s2_4, 1)
-                sound5 = sp.load(this, R.raw.s2_5, 1)
+                sound1 = sp.load(this, R.raw.s1_0, 1)
+                sound2 = sp.load(this, R.raw.s1_1, 1)
+                sound3 = sp.load(this, R.raw.s1_2, 1)
+                sound4 = sp.load(this, R.raw.s1_3, 1)
+                sound5 = sp.load(this, R.raw.s1_4, 1)
             }
             3 -> {
-                sound1 = sp.load(this, R.raw.s3_1, 1)
-                sound2 = sp.load(this, R.raw.s3_2, 1)
-                sound3 = sp.load(this, R.raw.s3_3, 1)
-                sound4 = sp.load(this, R.raw.s3_4, 1)
-                sound5 = sp.load(this, R.raw.s3_5, 1)
+                sound1 = sp.load(this, R.raw.s2_0, 1)
+                sound2 = sp.load(this, R.raw.s2_1, 1)
+                sound3 = sp.load(this, R.raw.s2_2, 1)
+                sound4 = sp.load(this, R.raw.s2_3, 1)
+                sound5 = sp.load(this, R.raw.s2_4, 1)
             }
         }
         sound5000 = sp.load(this, R.raw.s5000, 1)
