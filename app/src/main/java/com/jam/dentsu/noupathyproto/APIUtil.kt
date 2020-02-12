@@ -18,7 +18,7 @@ import java.util.zip.GZIPOutputStream
 
 
 
-private val server_url: String = "https://noupathy-server-stg.herokuapp.com/"
+private val server_url: String = "https://noupathy-server.herokuapp.com/"
 
 fun httpGet(url: String): InputStream? {
 
@@ -87,7 +87,7 @@ fun getN200Time(dir: String): Double{
 
 //P300強度取得
 fun getP300Voltage(dir: String): Double{
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -101,7 +101,7 @@ fun getP300Voltage(dir: String): Double{
 
 //N200強度取得
 fun getN200Voltage(dir: String): Double{
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -115,7 +115,7 @@ fun getN200Voltage(dir: String): Double{
 
 fun saveLearningData(dir: String, data: String) {
 
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
     val writer = BufferedWriter(FileWriter(file))
     writer.use {
         it.write(data)
@@ -124,7 +124,7 @@ fun saveLearningData(dir: String, data: String) {
 }
 
 fun loadClfData(dir: String?): String{
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -134,7 +134,7 @@ fun loadClfData(dir: String?): String{
 }
 
 fun loadStepIndexData(dir: String?): String{
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "model.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "model.json")
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
 
@@ -165,7 +165,7 @@ fun loadRaw(path: String?): MutableMap<String, MutableList<Int>>{
         str = br.readLine()
     }
 
-    var dataMap = mutableMapOf("Ch1" to ch1, "Ch2" to ch2, "Sound" to soundLabel)
+    var dataMap = mutableMapOf("ch1" to ch1, "ch2" to ch2, "select_music" to soundLabel)
 
     return dataMap
 }
@@ -175,7 +175,7 @@ fun PostDataToServer(json: JSONObject){
     val handler = Handler()
     val jsonString = json.toString()
     val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonString)
-    val request = Request.Builder().url("${server_url}/storing").post(postBody).build()
+    val request = Request.Builder().url(server_url+"/storing").post(postBody).build()
     val client = OkHttpClient.Builder()
         .connectTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
@@ -207,10 +207,9 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
     private var current_dir: String? = dir
     private var sub_id: String = user
     private var sound_set_id: Int = sound
-    private var DatasetIDList = listOf(2, 3)
 
     override fun loadInBackground(): String? {
-        val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${current_dir}/"
+        val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + current_dir + "/"
         val dir = File(path)
         val files = dir.list()
         var keys = mutableListOf<String>()
@@ -231,59 +230,46 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
 
         //学習データの送信処理
         var repCount: Array<Int> = arrayOf(1,1,1,1,1)
-        for(DatasetID in DatasetIDList){
-            for(file in files) {
-                if (file.contains("_play.csv") || file.contains("DS_Store") || file == "soundset.json") {
-                    continue
-                }
-                Log.d("http3", file)
-                val raw_data = loadRaw(path + file)
-                val Sound: List<Int>? = raw_data["Sound"]
-
-                val target_tag = file.split('_')[2].split('.')[0]
-                val iteration_tag = repCount[target_tag.toInt() - 1].toString();
-
-                //脳波データの送信
-                for (ch_num in listOf("1", "2")) {
-                    val json = JSONObject()
-                    json.put(
-                        "key",
-                        "Ch${ch_num}_${iteration_tag}_${target_tag}_${DatasetID}"
-                    )
-                    val raw: List<Int>? = raw_data["Ch${ch_num}"]
-                    json.put("data", JSONArray(raw))
-                    json.put("Soundset", sound_set_id)
-                    json.put("SubjectID", sub_id)
-                    Log.d(
-                        "http3",
-                        "Ch${ch_num}_${iteration_tag}_${target_tag}_${DatasetID}"
-                    )
-                    PostDataToServer(json)
-                    keys.add("Ch${ch_num}_${iteration_tag}_${target_tag}_${DatasetID}")
-                    sent_file_count += 1
-                    learning_progress_percent =
-                        sent_file_count.toDouble() / learning_file_total.toDouble() * 100
-                    Log.d(
-                        "http3",
-                        "${learning_progress_percent},${sent_file_count},${learning_file_total}"
-                    )
-                }
-
-                //被験者id, サウンドラベルの送信
-                val json = JSONObject()
-                json.put("key", "Sound_${iteration_tag}_${target_tag}_${DatasetID}")
-                json.put("data", JSONArray(Sound))
-                json.put("Soundset", sound_set_id)
-                json.put("SubjectID", sub_id)
-                Log.d("http3", "Sound_${iteration_tag}_${target_tag}_${DatasetID}")
-                PostDataToServer(json)
-
-                repCount[target_tag.toInt() - 1] = repCount[target_tag.toInt() - 1] + 1
-                keys.add("Sound_${iteration_tag}_${target_tag}_${DatasetID}")
-                sent_file_count += 1
-                learning_progress_percent =
-                    sent_file_count.toDouble() / learning_file_total.toDouble() * 100
+        for(file in files) {
+            if(file.contains("_play.csv") || file.contains("DS_Store") || file == "soundset.json"){
+                continue
             }
+            Log.d("http3", file)
+            val raw_data = loadRaw(path + file)
+            val selectMusic: List<Int>? = raw_data["select_music"]
+
+            val target_tag = file.split('_')[2].split('.')[0]
+            val iteration_tag = repCount[target_tag.toInt() - 1].toString();
+
+            //脳波データの送信
+            for(ch_num in listOf("1","2")){
+                val json = JSONObject()
+                json.put("key","Ch"+ch_num+"_" + iteration_tag + "_" + target_tag)
+                val raw: List<Int>? = raw_data["ch"+ch_num]
+                json.put("data", JSONArray(raw))
+                json.put("soundset",sound_set_id)
+                json.put("id",sub_id)
+                Log.d("http3", "ch"+ch_num+"_" + iteration_tag + "_" + target_tag)
+                PostDataToServer(json)
+                keys.add("Ch"+ch_num+"_"+iteration_tag+ "_" + target_tag)
+                sent_file_count+=1
+                learning_progress_percent = sent_file_count.toDouble()/learning_file_total.toDouble()*100
+                Log.d("http3", learning_progress_percent.toString()+","+sent_file_count.toString()+","+learning_file_total.toString())
+            }
+
+            //被験者id, サウンドラベルの送信
+            val json = JSONObject()
+            json.put("key", "SelectMusic_"+iteration_tag+ "_" + target_tag)
+            json.put("data", JSONArray(selectMusic))
+            json.put("soundset",sound_set_id)
+            json.put("id", sub_id)
+            Log.d("http3", "SelectMusic_"+iteration_tag+ "_" + target_tag)
+            PostDataToServer(json)
+
+            repCount[target_tag.toInt() - 1] = repCount[target_tag.toInt() - 1] + 1
+            keys.add("SelectMusic_"+iteration_tag+ "_" + target_tag)
+            sent_file_count+=1
+            learning_progress_percent =sent_file_count.toDouble()/learning_file_total.toDouble()*100
         }
 
         //学習処理の開始
@@ -291,13 +277,13 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
         val handler = Handler()
 
         json.put("keys",JSONArray(keys))
-        json.put("SubjectID",sub_id)
+        json.put("id",sub_id)
 
         val jsonString = json.toString()
         val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
             jsonString)
 
-        val learning_request = Request.Builder().url("${server_url}/learning").post(postBody).build()
+        val learning_request = Request.Builder().url(server_url+"/learning").post(postBody).build()
 
         val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -325,7 +311,7 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
 
         Log.i("toridge.okhttp3", "これから学習リクエスト")
 
-        val request = Request.Builder().url("${server_url}/get-learning-result").post(postBody).build()
+        val request = Request.Builder().url(server_url+"/get-learning-result").post(postBody).build()
 
         var response_flag = false
         while(response_flag==false) {
@@ -402,7 +388,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
     private var current_dir: String? = dir
     private var current_file: String? = file
     private var class_num: Int? = classNum
-    private val server_url: String = "https://noupathy-server-stg.herokuapp.com/"
+    private val server_url: String = "https://noupathy-server.herokuapp.com/"
 
     override fun loadInBackground(): ResultData? {
 
@@ -414,28 +400,29 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         }
 
         // 学習データ読み込み
-        val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${current_dir}/"
+        val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + current_dir + "/"
+        val dir = File(path)
         Log.i("toridge.okhttp3", "これから読み込み")
 
-        val raw_data = loadRaw("${path}${current_file}")
-        val ch1: List<Int>? = raw_data["Ch1"]
-        val ch2: List<Int>? = raw_data["Ch2"]
-        val Sound: List<Int>? = raw_data["Sound"]
+        val raw_data = loadRaw(path + current_file)
+        val ch1: List<Int>? = raw_data["ch1"]
+        val ch2: List<Int>? = raw_data["ch2"]
+        val selectMusic: List<Int>? = raw_data["select_music"]
 
         //HTTPリクエスト
         val handler = Handler()
         val json = JSONObject()
         json.put("Ch1",JSONArray(ch1))
         json.put("Ch2",JSONArray(ch2))
-        json.put("Sound", JSONArray(Sound))
-        json.put("json_model", loadClfData(current_dir))
-        json.put("step_index", loadStepIndexData(current_dir))
+        json.put("SelectMusic", JSONArray(selectMusic))
+        json.put("json_model", loadClfData(current_dir).toString())
+        json.put("step_index", loadStepIndexData(current_dir).toString())
         json.put("class_num", class_num.toString())
 
         Log.i("toridge.okhttp3", "これからリクエスト")
 
         val postBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString())
-        val request = Request.Builder().url("${server_url}/predicting").post(postBody).build()
+        val request = Request.Builder().url(server_url+"/predicting").post(postBody).build()
 
         val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -524,7 +511,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         }
 
         result.select = result.per_d.indexOf(result.per_d.max())+1
-        println("result: ${result}")
+        println("result: " + result)
 
         return result
     }

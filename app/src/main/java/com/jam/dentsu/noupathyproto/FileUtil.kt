@@ -163,7 +163,7 @@ fun getSoundSetID(dir: String): Int {
         val reader = BufferedReader(FileReader(file))
         val data = reader.readLines().joinToString()
         val json = JSONObject(data)
-        sound_set_id = json.getInt("Soundset")
+        sound_set_id = json.getInt("sound_set_id")
     } else {
 
         val data = JSONObject()
@@ -187,7 +187,7 @@ fun setSoundSetID(dir: String, id: Int) {
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
     val json = JSONObject(data)
-    json.put("Soundset", id)
+    json.put("sound_set_id", id)
 
     val writer = BufferedWriter(FileWriter(file))
     writer.use {
