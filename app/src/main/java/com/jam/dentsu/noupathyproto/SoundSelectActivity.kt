@@ -81,7 +81,7 @@ class SoundSelectActivity : AppCompatActivity() {
 
     private fun regardingSoundBtn(row: Int, col: Int) {
         val intent = Intent(this, PostSoundSelectActivity::class.java)
-        intent.putExtra("soundNumArray", arrayOf<Int>(row, col))
+        intent.putExtra("soundNumArray", arrayOf(row, col))
         println(intent.getIntArrayExtra("soundNumArray"))
         startActivityForResult(intent, 1)
     }
@@ -97,7 +97,7 @@ class SoundSelectActivity : AppCompatActivity() {
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(5)
             .build()
-        
+
         sArray[0][0] = sp.load(this, R.raw.s1_1, 1)
         sArray[0][1] = sp.load(this, R.raw.s1_2, 1)
         sArray[0][2] = sp.load(this, R.raw.s1_3, 1)
