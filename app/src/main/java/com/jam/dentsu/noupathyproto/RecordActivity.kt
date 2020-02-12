@@ -344,32 +344,32 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
     private var temp_sound_label = 0
     private var stim_count = 0
-    private var temp_ch1 = 0
-    private var temp_ch2 = 0
-    private var ground_ch1 = mutableListOf(0,0,0,0,0)
-    private var ground_ch2 = mutableListOf(0,0,0,0,0)
+    private var temp_Ch1 = 0
+    private var temp_Ch2 = 0
+    private var ground_Ch1 = mutableListOf(0,0,0,0,0)
+    private var ground_Ch2 = mutableListOf(0,0,0,0,0)
 
-    override fun onDataReceived(ch1: Int, ch2: Int) {
+    override fun onDataReceived(Ch1: Int, Ch2: Int) {
 
         if (isRecording) {
 
             val time = Date()
-            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
+            pw?.print("${format.format(time)},${Ch1},${Ch2},${currentSound}\n")
             if(currentSound!="") {
-                ground_ch1.removeAt(0)
-                ground_ch2.removeAt(0)
-                ground_ch1.add(ch1)
-                ground_ch2.add(ch2)
+                ground_Ch1.removeAt(0)
+                ground_Ch2.removeAt(0)
+                ground_Ch1.add(Ch1)
+                ground_Ch2.add(Ch2)
                 if (currentSound.toInt() != temp_sound_label) {
                     if (currentTarget == currentSound.toInt()) {
                         stim_count = 0
-                        temp_ch1 = ground_ch1.average().toInt()
-                        temp_ch2 = ground_ch2.average().toInt()
+                        temp_Ch1 = ground_Ch1.average().toInt()
+                        temp_Ch2 = ground_Ch2.average().toInt()
                     }
                     temp_sound_label = currentSound.toInt()
                 }
                 if (stim_count == 125) {
-                    if ((ch1 - temp_ch1 + ch2 - temp_ch2) / 2 > 100) {
+                    if ((Ch1 - temp_Ch1 + Ch2 - temp_Ch2) / 2 > 100) {
                         sound_levels[currentTarget - 1] += 0.10f
                         pitch_levels[currentTarget -1] = 1.05f
                     }

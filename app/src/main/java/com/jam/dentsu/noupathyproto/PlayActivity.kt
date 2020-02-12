@@ -211,19 +211,19 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
 
                     // 信号の分散を確認して終わらせるかどうか判定
                     if(playCount==SetSize*5 && repeatCount < repeatSize) {
-                        if ((calcVariance(v_argt_ch1[0]) + calcVariance(v_argt_ch2[0])) / 2 > 1000) {
+                        if ((calcVariance(v_argt_Ch1[0]) + calcVariance(v_argt_Ch2[0])) / 2 > 1000) {
                             setCount = 1
                             repeatCount += 1
-                        } else if ((calcVariance(v_argt_ch1[1]) + calcVariance(v_argt_ch2[1])) / 2 > 1000) {
+                        } else if ((calcVariance(v_argt_Ch1[1]) + calcVariance(v_argt_Ch2[1])) / 2 > 1000) {
                             setCount = 1
                             repeatCount += 1
-                        } else if ((calcVariance(v_argt_ch1[2]) + calcVariance(v_argt_ch2[2])) / 2 > 1000) {
+                        } else if ((calcVariance(v_argt_Ch1[2]) + calcVariance(v_argt_Ch2[2])) / 2 > 1000) {
                             setCount = 1
                             repeatCount += 1
-                        } else if ((calcVariance(v_argt_ch1[3]) + calcVariance(v_argt_ch2[3])) / 2 > 1000) {
+                        } else if ((calcVariance(v_argt_Ch1[3]) + calcVariance(v_argt_Ch2[3])) / 2 > 1000) {
                             setCount = 1
                             repeatCount += 1
-                        } else if ((calcVariance(v_argt_ch1[4]) + calcVariance(v_argt_ch2[4])) / 2 > 1000) {
+                        } else if ((calcVariance(v_argt_Ch1[4]) + calcVariance(v_argt_Ch2[4])) / 2 > 1000) {
                             setCount = 1
                             repeatCount += 1
                         }
@@ -233,8 +233,8 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                 }
                 else if (setCount == SetSize+1) {
                     for(i in 0..4){
-                        v_argt_ch1[i].clear()
-                        v_argt_ch2[i].clear()
+                        v_argt_Ch1[i].clear()
+                        v_argt_Ch2[i].clear()
                     }
 
                     // 最後の空白
@@ -321,32 +321,32 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
     private var stim_counts = arrayOf(-250,-250,-250,-250,-250)
 
     //音量調整用のeeg判定
-    private var temp_ch1s = arrayOf(0,0,0,0,0)
-    private var temp_ch2s = arrayOf(0,0,0,0,0)
+    private var temp_Ch1s = arrayOf(0,0,0,0,0)
+    private var temp_Ch2s = arrayOf(0,0,0,0,0)
     //音量調整用のeeg判定をするためのグラウンド
-    private var ground_ch1 = mutableListOf(0,0,0,0,0)
-    private var ground_ch2 = mutableListOf(0,0,0,0,0)
+    private var ground_Ch1 = mutableListOf(0,0,0,0,0)
+    private var ground_Ch2 = mutableListOf(0,0,0,0,0)
 
     //信号分散計測用の配列
-    private var v_argt_ch1 = mutableListOf(mutableListOf<Int>(), mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>())
-    private var v_argt_ch2 = mutableListOf(mutableListOf<Int>(), mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>())
+    private var v_argt_Ch1 = mutableListOf(mutableListOf<Int>(), mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>())
+    private var v_argt_Ch2 = mutableListOf(mutableListOf<Int>(), mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>(),mutableListOf<Int>())
 
-    override fun onDataReceived(ch1: Int, ch2: Int) {
+    override fun onDataReceived(Ch1: Int, Ch2: Int) {
 
         if (isRecording) {
 
             val time = Date()
-            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
+            pw?.print("${format.format(time)},${Ch1},${Ch2},${currentSound}\n")
             val receivedSound = currentSound
             if(receivedSound!="") {
-                ground_ch1.removeAt(0)
-                ground_ch2.removeAt(0)
-                ground_ch1.add(ch1)
-                ground_ch2.add(ch2)
+                ground_Ch1.removeAt(0)
+                ground_Ch2.removeAt(0)
+                ground_Ch1.add(Ch1)
+                ground_Ch2.add(Ch2)
                 if (receivedSound.toInt() != temp_sound_label) {
                     stim_counts[receivedSound.toInt()-1] = 0
-                    temp_ch1s[receivedSound.toInt()-1]= ground_ch1.average().toInt()
-                    temp_ch2s[receivedSound.toInt()-1] = ground_ch2.average().toInt()
+                    temp_Ch1s[receivedSound.toInt()-1]= ground_Ch1.average().toInt()
+                    temp_Ch2s[receivedSound.toInt()-1] = ground_Ch2.average().toInt()
 
                     temp_sound_label = receivedSound.toInt()
                 }
@@ -368,11 +368,11 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     }
 
                     if (stim_counts[i] == p300Point) {
-                        Log.d("eeg_level", "${i},${ch1},${ch2}")
-                        v_argt_ch1[receivedSound.toInt()-1].add(ch1)
-                        v_argt_ch2[receivedSound.toInt()-1].add(ch2)
+                        Log.d("eeg_level", "${i},${Ch1},${Ch2}")
+                        v_argt_Ch1[receivedSound.toInt()-1].add(Ch1)
+                        v_argt_Ch2[receivedSound.toInt()-1].add(Ch2)
 
-                        if ((ch1 - temp_ch1s[i] + ch2 - temp_ch2s[i]) / 2 >= p300Volt) {
+                        if ((Ch1 - temp_Ch1s[i] + Ch2 - temp_Ch2s[i]) / 2 >= p300Volt) {
                             sound_levels[i] += 0.10f
                         } else {
                             sound_levels[i] -= 0.10f
@@ -383,11 +383,11 @@ class PlayActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
                     }
 
                     if (stim_counts[i] == n200Point) {
-                        Log.d("eeg_level", "${i},${ch1},${ch2}")
-                        v_argt_ch1[receivedSound.toInt()-1].add(ch1)
-                        v_argt_ch2[receivedSound.toInt()-1].add(ch2)
+                        Log.d("eeg_level", "${i},${Ch1},${Ch2}")
+                        v_argt_Ch1[receivedSound.toInt()-1].add(Ch1)
+                        v_argt_Ch2[receivedSound.toInt()-1].add(Ch2)
 
-                        if ((ch1 - temp_ch1s[i] + ch2 - temp_ch2s[i]) / 2 <= n200Volt) {
+                        if ((Ch1 - temp_Ch1s[i] + Ch2 - temp_Ch2s[i]) / 2 <= n200Volt) {
                             sound_levels[i] += 0.10f
                         } else {
                             sound_levels[i] -= 0.10f

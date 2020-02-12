@@ -279,12 +279,12 @@ class GameActivity : AppCompatActivity(), neuroNicleService.Companion.NNListener
         neuroNicleService.setListener(null)
     }
 
-    override fun onDataReceived(ch1: Int, ch2: Int) {
+    override fun onDataReceived(Ch1: Int, Ch2: Int) {
 
         if (isRecording) {
 
             val time = Date()
-            pw?.print("${format.format(time)},${ch1},${ch2},${currentSound}\n")
+            pw?.print("${format.format(time)},${Ch1},${Ch2},${currentSound}\n")
         }
     }
 

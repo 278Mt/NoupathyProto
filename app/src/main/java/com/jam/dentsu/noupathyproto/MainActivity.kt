@@ -139,4 +139,8 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
     }
+
+    /*
+    ここを開いた時にNoupathy/soundset.jsonがなかったら新規作成、あったら読み込み
+     */
 }

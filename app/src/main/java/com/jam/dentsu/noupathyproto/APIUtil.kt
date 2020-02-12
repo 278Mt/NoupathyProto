@@ -145,8 +145,8 @@ fun loadStepIndexData(dir: String?): String{
 
 
 fun loadRaw(path: String?): MutableMap<String, MutableList<Int>>{
-    var ch1: MutableList<Int> = mutableListOf()
-    var ch2: MutableList<Int> = mutableListOf()
+    var Ch1: MutableList<Int> = mutableListOf()
+    var Ch2: MutableList<Int> = mutableListOf()
     var soundLabel: MutableList<Int> = mutableListOf()
     val fr = FileReader(path)
     val br = BufferedReader(fr)
@@ -154,8 +154,8 @@ fun loadRaw(path: String?): MutableMap<String, MutableList<Int>>{
     str = br.readLine()
     while(str != null){
         var row = str.split(",")
-        ch1.add(row[1].toInt())
-        ch2.add(row[2].toInt())
+        Ch1.add(row[1].toInt())
+        Ch2.add(row[2].toInt())
         if(row[3]=="") {
             soundLabel.add(0)
         }
@@ -165,7 +165,7 @@ fun loadRaw(path: String?): MutableMap<String, MutableList<Int>>{
         str = br.readLine()
     }
 
-    var dataMap = mutableMapOf("ch1" to ch1, "ch2" to ch2, "select_music" to soundLabel)
+    var dataMap = mutableMapOf("Ch1" to Ch1, "Ch2" to Ch2, "Sound" to soundLabel)
 
     return dataMap
 }
@@ -236,7 +236,7 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
             }
             Log.d("http3", file)
             val raw_data = loadRaw(path + file)
-            val selectMusic: List<Int>? = raw_data["select_music"]
+            val Sound: List<Int>? = raw_data["Sound"]
 
             val target_tag = file.split('_')[2].split('.')[0]
             val iteration_tag = repCount[target_tag.toInt() - 1].toString();
@@ -259,15 +259,15 @@ class LearningLoader(context: Context, dir: String?, user: String, sound: Int): 
 
             //被験者id, サウンドラベルの送信
             val json = JSONObject()
-            json.put("key", "SelectMusic_${iteration_tag}_${target_tag}")
-            json.put("data", JSONArray(selectMusic))
+            json.put("key", "Sound_${iteration_tag}_${target_tag}")
+            json.put("data", JSONArray(Sound))
             json.put("soundset", sound_set_id)
             json.put("id", sub_id)
-            Log.d("http3", "SelectMusic_${iteration_tag}_${target_tag}")
+            Log.d("http3", "Sound_${iteration_tag}_${target_tag}")
             PostDataToServer(json)
 
             repCount[target_tag.toInt() - 1] = repCount[target_tag.toInt() - 1] + 1
-            keys.add("SelectMusic_${iteration_tag}_${target_tag}")
+            keys.add("Sound_${iteration_tag}_${target_tag}")
             sent_file_count+=1
             learning_progress_percent =sent_file_count.toDouble()/learning_file_total.toDouble()*100
         }
@@ -404,19 +404,18 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
         val dir = File(path)
         Log.i("toridge.okhttp3", "これから読み込み")
 
-        val raw_data = loadRaw(path + current_file)
-        val ch1: List<Int>? = raw_data["ch1"]
-        val ch2: List<Int>? = raw_data["ch2"]
-        val selectMusic: List<Int>? = raw_data["select_music"]
+        val raw_data = loadRaw("${path}${current_file}")
+        val Ch1: List<Int>? = raw_data["Ch1"]
+        val Ch2: List<Int>? = raw_data["Ch2"]
+        val Sound: List<Int>? = raw_data["Sound"]
 
         //HTTPリクエスト
-        val handler = Handler()
         val json = JSONObject()
-        json.put("Ch1",JSONArray(ch1))
-        json.put("Ch2",JSONArray(ch2))
-        json.put("SelectMusic", JSONArray(selectMusic))
-        json.put("json_model", loadClfData(current_dir).toString())
-        json.put("step_index", loadStepIndexData(current_dir).toString())
+        json.put("Ch1",JSONArray(Ch1))
+        json.put("Ch2",JSONArray(Ch2))
+        json.put("Sound", JSONArray(Sound))
+        json.put("json_model", loadClfData(current_dir))
+        json.put("step_index", loadStepIndexData(current_dir))
         json.put("class_num", class_num.toString())
 
         Log.i("toridge.okhttp3", "これからリクエスト")
@@ -433,7 +432,7 @@ class PredictLoader(context: Context, dir: String?, file: String?, classNum: Int
 
 
         var response_flag = false
-        while(response_flag==false) {
+        while(! response_flag) {
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     e.printStackTrace();

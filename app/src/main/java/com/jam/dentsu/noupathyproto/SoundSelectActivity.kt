@@ -76,7 +76,7 @@ class SoundSelectActivity : AppCompatActivity() {
             .setMaxStreams(5)
             .build()
 
-        var RRawAddress = mutableListOf(
+        var RRawSList = mutableListOf(
             mutableListOf(R.raw.s0_0, R.raw.s0_1, R.raw.s0_2, R.raw.s0_3, R.raw.s0_4),
             mutableListOf(R.raw.s1_0, R.raw.s1_1, R.raw.s1_2, R.raw.s1_3, R.raw.s1_4),
             mutableListOf(R.raw.s2_0, R.raw.s2_1, R.raw.s2_2, R.raw.s2_3, R.raw.s2_4)
@@ -84,7 +84,7 @@ class SoundSelectActivity : AppCompatActivity() {
 
         for (i in 0 until 3) {
             for (j in 0 until 5) {
-                sArray[i][j] = sp.load(this, RRawAddress[i][j], 1)
+                sArray[i][j] = sp.load(this, RRawSList[i][j], 1)
             }
         }
 
