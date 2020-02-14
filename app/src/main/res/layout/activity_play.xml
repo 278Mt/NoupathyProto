@@ -25,7 +25,7 @@
     <Button
             android:layout_width="304dp"
             android:layout_height="58dp"
-            android:id="@+id/start" android:textSize="28dp"
+            android:id="@+id/startBtn" android:textSize="28dp"
             android:fontFamily="@font/roboto_bold"
             android:background="@drawable/ply_start_btn_set"
             android:layout_marginBottom="9dp" app:layout_constraintBottom_toBottomOf="parent"
@@ -263,7 +263,7 @@
     <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:id="@+id/view" android:background="@android:color/white"
+            android:id="@+id/view1" android:background="@android:color/white"
             app:layout_constraintStart_toStartOf="@+id/guideline11" app:layout_constraintEnd_toStartOf="@+id/guideline"
             android:layout_marginEnd="16dp" android:layout_marginStart="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/edit1"/>
@@ -295,36 +295,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline11"
             android:layout_marginStart="14dp" app:layout_constraintEnd_toStartOf="@+id/guideline"
             android:layout_marginEnd="16dp" app:layout_constraintBottom_toBottomOf="@+id/edit5"/>
-    <TextView
-            android:text="使用するには学習精度を上げて下さい"
-            android:layout_width="825dp"
-            android:layout_height="53dp"
-            android:id="@+id/limit2"
-            app:layout_constraintTop_toTopOf="@+id/play2" app:layout_constraintBottom_toBottomOf="@+id/play2"
-            app:layout_constraintStart_toStartOf="@+id/status2" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/edit2" android:textColor="#FFFFFF"
-            android:gravity="center|center_vertical" android:background="#C40A0A0A"
-    />
-    <TextView
-            android:text="使用するには学習精度を上げて下さい"
-            android:layout_width="825dp"
-            android:layout_height="53dp"
-            android:id="@+id/limit3"
-            app:layout_constraintTop_toTopOf="@+id/play3" app:layout_constraintBottom_toBottomOf="@+id/play3"
-            app:layout_constraintStart_toStartOf="@+id/status3" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/edit3" android:textColor="#FFFFFF"
-            android:gravity="center|center_vertical" android:background="#C40A0A0A"
-    />
-    <TextView
-            android:text="使用するには学習精度を上げて下さい"
-            android:layout_width="825dp"
-            android:layout_height="53dp"
-            android:id="@+id/limit4"
-            app:layout_constraintTop_toTopOf="@+id/play4" app:layout_constraintBottom_toBottomOf="@+id/play4"
-            app:layout_constraintStart_toStartOf="@+id/status4" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/edit4" android:textColor="#FFFFFF"
-            android:gravity="center|center_vertical" android:background="#C40A0A0A"
-    />
 
     <com.polyak.iconswitch.IconSwitch
             android:id="@+id/volumeSw"

@@ -33,11 +33,14 @@ fun getDataset(): DataSets {
     val dirs = getAllDirs()
 
     for (dir in dirs) {
+        if(dir.extension=="json"){
+            continue
+        }
         var st = ""
         val status = getDirStatus(dir.name)
         if (status.learning) {
             val acc = getAccuracy(dir.name,5)
-            st = "学習済 ${acc}"
+            st = "学習済 " + acc
         }
         val set = DataSet(name = dir.name, status = st)
         datasets.add(set)
@@ -48,7 +51,7 @@ fun getDataset(): DataSets {
 
 private fun makeAppRootDir() {
 
-    val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/"
+    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/"
     val root = File(path)
     if (!root.exists()) {
         root.mkdir()
@@ -59,9 +62,9 @@ fun addDatasetDir() {
 
     makeAppRootDir()
 
-    val name = "DATASET_${(getDirCount()+1)}"
+    val name = "DATASET_" + (getDirCount()+1).toString()
 
-    val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${name}"
+    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + name
     val dir = File(path)
     if (!dir.exists()) {
         dir.mkdir()
@@ -73,12 +76,16 @@ fun getDirCount(): Int {
     makeAppRootDir()
     val count = getAllDirs().size
 
+//    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/"
+//    val root = File(path)
+//    val count = root.listFiles().size
+
     return count
 }
 
 private fun getAllDirs(): Array<File> {
 
-    val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/"
+    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/"
     val root = File(path)
     val dirs = root.listFiles()
 
@@ -87,7 +94,7 @@ private fun getAllDirs(): Array<File> {
 
 fun getDirStatus(dir: String): DatasetStatus {
 
-    val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}/"
+    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir + "/"
     val dir = File(path)
     val files = dir.list()
 
@@ -117,7 +124,7 @@ fun learnedDataIsExist(): Boolean {
 
     val dirs = getAllDirs()
     for (dir in dirs) {
-        println("dir: ${dir}")
+        println("dir: " + dir)
         val path = File(dir.toURI())
         val files = path.list()
 
@@ -142,7 +149,7 @@ fun getNextTarget(dataset: DatasetStatus): Int {
 
 fun deleteFile(dir: String, name: String) {
 
-    val path = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}/${name}"
+    val path = Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir + "/" +  name
     val file = File(path)
     file.delete()
 }
@@ -150,8 +157,9 @@ fun deleteFile(dir: String, name: String) {
 fun getSoundSetID(dir: String): Int {
 
     var sound_set_id = 1
+    var json = null
 
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "soundset.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "soundset.json")
 
     if (file.exists()) {
 
@@ -177,7 +185,7 @@ fun getSoundSetID(dir: String): Int {
 
 fun setSoundSetID(dir: String, id: Int) {
 
-    val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "soundset.json")
+    val file = File(Environment.getExternalStorageDirectory().path + "/" + APP_ROOT + "/" + dir, "soundset.json")
 
     val reader = BufferedReader(FileReader(file))
     val data = reader.readLines().joinToString()
@@ -189,4 +197,10 @@ fun setSoundSetID(dir: String, id: Int) {
         it.write(json.toString())
         it.flush()
     }
+}
+
+fun getUserID(): String {
+
+
+    return "0000"
 }

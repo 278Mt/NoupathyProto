@@ -1,3 +1,3 @@
-/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/noise_detector.dir
+/Users/mikito_ogino/GitHub/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/mikito_ogino/GitHub/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/mikito_ogino/GitHub/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/noise_detector.dir

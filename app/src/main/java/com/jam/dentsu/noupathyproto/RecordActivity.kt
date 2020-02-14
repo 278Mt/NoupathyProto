@@ -14,11 +14,15 @@ import android.os.Handler
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.Loader
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_record.*
+import java.io.BufferedWriter
+import java.io.FileWriter
+import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.schedule
@@ -52,6 +56,8 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
     private lateinit var sp: SoundPool
     private var soundList = mutableListOf(0, 0, 0, 0, 0)
     private var sound5000 = 0
+    private var sound_noise = 0
+    private var current_sound_noise = 0
     private var isSoundSelectEnabled = true
 
     private val handler = Handler()
@@ -175,6 +181,7 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
                 if (setCount == 0) {
                     println("start")
+                    current_sound_noise = sp.play(sound_noise, 0.5f, 0.5f, 0, -1, 1.0f)
                     isSoundArrayPlaying = false
                     sp.play(sound5000, 1.0f, 1.0f, 0, 0, 1.0f)
                     setCount++
@@ -210,6 +217,8 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
                     sp.play(sound5000, 1.0f, 1.0f, 0, 0, 1.0f)
                     nowPlaying("0", nowPlayingImage!!, playerProgress!!)
                     handler.postDelayed(this, 1000)
+                    Log.d("sound_noise","stop")
+                    sp.stop(current_sound_noise)
                 } else {
                     println("end")
                     setCount = 0
@@ -223,6 +232,7 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
                         isSuspend = false
                         isSoundArrayPlaying = false
                         showNoiseErrorDialog()
+                        sp.stop(current_sound_noise)
                     } else {
                         updateLearningStatus(true)
                     }
@@ -524,10 +534,11 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
     private fun showLearnResultDialog() {
 
         val inflater = this.layoutInflater.inflate(R.layout.dialog_learn_result, null, false)
+        val accLbl1 = inflater.findViewById<TextView>(R.id.accLbl1)
         val accLbl2 = inflater.findViewById<TextView>(R.id.accLbl2)
         val accLbl3 = inflater.findViewById<TextView>(R.id.accLbl3)
         val accLbl4 = inflater.findViewById<TextView>(R.id.accLbl4)
-        val accLbl5 = inflater.findViewById<TextView>(R.id.accLbl)
+        val accLbl5 = inflater.findViewById<TextView>(R.id.accLbl5)
         val accDesc = inflater.findViewById<TextView>(R.id.accDesc)
         val indicator = inflater.findViewById<ImageView>(R.id.speedIndicator)
         val speedDesc = inflater.findViewById<TextView>(R.id.speedDesc)
@@ -535,25 +546,29 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
         learnResultDialog = AlertDialog.Builder(this).apply {
             setView(inflater)
-            accLbl2.text = resultAccuracy2
-            accLbl3.text = resultAccuracy3
-            accLbl4.text = resultAccuracy4
-            accLbl5.text = resultAccuracy5
-            var classNum = ""
-            if (resultAccuracy5.split("%")[0].toDouble()>80) {
-                classNum = "5分類"
-                hiligtedText(accLbl5)
-            } else if (resultAccuracy4.split("%")[0].toDouble()>80) {
-                classNum = "4分類"
-                hiligtedText(accLbl4)
-            } else if (resultAccuracy3.split("%")[0].toDouble()>80) {
-                classNum = "3分類"
-                hiligtedText(accLbl3)
-            } else {
-                classNum = "2分類"
-                hiligtedText(accLbl2)
-            }
-            accDesc.text = "このデータセットでは${classNum}が使用されます"
+              val classAcc = getClassAccuracy(currentDataset)
+             accLbl1.text = String.format("%.2f", classAcc[0]*100)+"%"
+             accLbl2.text = String.format("%.2f", classAcc[1]*100)+"%"
+             accLbl3.text = String.format("%.2f", classAcc[2]*100)+"%"
+             accLbl4.text = String.format("%.2f", classAcc[3]*100)+"%"
+             accLbl5.text = String.format("%.2f", classAcc[4]*100)+"%"
+             /*
+             var classNum = ""
+             if (resultAccuracy5.split("%")[0].toDouble()>80) {
+                 classNum = "5分類"
+                 hiligtedText(accLbl5)
+             } else if (resultAccuracy4.split("%")[0].toDouble()>80) {
+                 classNum = "4分類"
+                 hiligtedText(accLbl4)
+             } else if (resultAccuracy3.split("%")[0].toDouble()>80) {
+                 classNum = "3分類"
+                 hiligtedText(accLbl3)
+             } else {
+                 classNum = "2分類"
+                 hiligtedText(accLbl2)
+             }
+             */
+             //accDesc.text = "このデータセットでは${classNum}が使用されます"
 
             if (p300Point < p300AveragePoint) {
                 speedDesc.text = "反応が少し早いようです。\n音が鳴ってから回数を数えるタイミングを\n遅くするように意識しましょう"

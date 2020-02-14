@@ -16,9 +16,11 @@ class neuroNicleService private constructor(context: Context) {
 
     var isConnected = false
     var isFitting = false
-    var calibTime = 60
+    var defaultCalibTime = 60
+    var calibTime = defaultCalibTime
     var noiseDetected = false
     var batteryAlert = false
+    var debug_on = false
 
     external fun judgeNoiseC(raw1: Int, raw2: Int): Boolean
 
@@ -33,7 +35,7 @@ class neuroNicleService private constructor(context: Context) {
 
         private var listener: NNListener? = null
         interface NNListener {
-            fun onDataReceived(Ch1: Int, Ch2: Int)
+            fun onDataReceived(ch1: Int, ch2: Int)
         }
         fun setListener(listener: NNListener?) {
             this.listener = listener
@@ -61,8 +63,8 @@ class neuroNicleService private constructor(context: Context) {
         var times = mutableListOf<Date>()
         val format = SimpleDateFormat("yyyyMMdd-HH:mm:ss.SSS", Locale.getDefault())
 
-        var Ch1 = 0
-        var Ch2 = 0
+        var ch1 = 0
+        var ch2 = 0
 
         var pcd: Byte = 0
         var packetCount = 0
@@ -195,15 +197,21 @@ class neuroNicleService private constructor(context: Context) {
                                     if (i == 3) { // CRD_PUD2_PCDT
                                         try {
                                             val bit = Integer.parseInt(arr[i],16)
+                                            // println( "BinaryString: " + getByteBinaryStr(bytes[3]))
 
                                             if (bit == 56) {
                                                 neuroNicleService.instance.isFitting = true
 
-                                            } else {
+                                            }
+                                            else if(neuroNicleService.instance.debug_on){
+                                                neuroNicleService.instance.isFitting = true
+                                            }
+                                            else {
                                                 neuroNicleService.instance.isFitting = false
                                                 calib_count = 0
-                                                neuroNicleService.instance.calibTime = 60
+                                                neuroNicleService.instance.calibTime = neuroNicleService.instance.defaultCalibTime
                                             }
+
                                         } catch (e: IOException) {
                                             e.printStackTrace()
                                         }
@@ -220,7 +228,7 @@ class neuroNicleService private constructor(context: Context) {
                                         }
                                     }
 
-                                    if (i == 7 || i == 8) { // Ch1
+                                    if (i == 7 || i == 8) { // ch1
                                         if (prev1 == 0) {
                                             prev1 = 1
                                             _prev1 = Integer.parseInt(arr[i], 16)
@@ -229,7 +237,9 @@ class neuroNicleService private constructor(context: Context) {
                                         } else if (prev1 == 1) {
                                             prev1 = 0
                                             _curt1 = Integer.parseInt(arr[i], 16)
-                                            Ch1 = _curt1 + _prev1
+                                            ch1 = _curt1 + _prev1
+
+                                            //println("ch1: " + ch1)
 
                                             if (neuroNicleService.instance.isFitting && neuroNicleService.instance.calibTime > 0) {
                                                 calib_count++
@@ -241,7 +251,7 @@ class neuroNicleService private constructor(context: Context) {
                                         }
                                     }
 
-                                    if (i == 9 || i == 10) { // Ch2
+                                    if (i == 9 || i == 10) { // ch2
                                         if (prev2 == 0) {
                                             prev2 = 1
                                             _prev2 = Integer.parseInt(arr[i], 16)
@@ -250,16 +260,21 @@ class neuroNicleService private constructor(context: Context) {
                                         } else if (prev2 == 1) {
                                             prev2 = 0
                                             _curt2 = Integer.parseInt(arr[i], 16)
-                                            Ch2 = _curt2 + _prev2
+                                            ch2 = _curt2 + _prev2
+
+                                            //println("ch2: " + ch2)
 
                                             if(listener != null) {
                                                 // 値を通知
-                                                listener!!.onDataReceived(Ch1, Ch2)
+                                                listener!!.onDataReceived(ch1, ch2)
                                             }
                                         }
                                     }
                                 }
-                                neuroNicleService.instance.noiseDetected = neuroNicleService.instance.judgeNoiseC(Ch1, Ch2)
+                                neuroNicleService.instance.noiseDetected = neuroNicleService.instance.judgeNoiseC(ch1, ch2)
+                                if(neuroNicleService.instance.debug_on) {
+                                    neuroNicleService.instance.noiseDetected = false
+                                }
                                 packet.setLength(0)
                                 packet.append("ff fe")
                             } else {

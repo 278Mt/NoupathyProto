@@ -1,16 +1,16 @@
 {
   "buildFiles": [
-    "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/CMakeLists.txt"
+    "/Users/mikito_ogino/GitHub/NoupathyProto/CMakeLists.txt"
   ],
   "cleanCommands": [
-    "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a --target clean"
+    "/Users/mikito_ogino/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/mikito_ogino/GitHub/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a --target clean"
   ],
   "libraries": {
     "noise_detector-Debug-armeabi-v7a": {
       "artifactName": "noise_detector",
-      "buildCommand": "/Users/278mt/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a --target noise_detector",
+      "buildCommand": "/Users/mikito_ogino/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/mikito_ogino/GitHub/NoupathyProto/app/.cxx/cmake/debug/armeabi-v7a --target noise_detector",
       "abi": "armeabi-v7a",
-      "output": "/Users/278mt/Desktop/dsj/noupathy/NoupathyProto/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnoise_detector.so"
+      "output": "/Users/mikito_ogino/GitHub/NoupathyProto/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnoise_detector.so"
     }
   }
 }
