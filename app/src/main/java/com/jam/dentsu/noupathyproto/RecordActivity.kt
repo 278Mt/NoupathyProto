@@ -19,15 +19,14 @@ import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_record.*
-import java.io.BufferedWriter
-import java.io.FileWriter
-import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.schedule
 import kotlin.concurrent.thread
 import com.polyak.iconswitch.IconSwitch.Checked
 import com.polyak.iconswitch.IconSwitch
+import org.json.JSONObject
+import java.io.*
 
 var learning_progress_percent: Double = 0.0
 
@@ -51,11 +50,7 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
     lateinit var pref: SharedPreferences
 
     private lateinit var sp: SoundPool
-    private var sound1 = 0
-    private var sound2 = 0
-    private var sound3 = 0
-    private var sound4 = 0
-    private var sound5 = 0
+    private var soundList = mutableListOf(0, 0, 0, 0, 0)
     private var sound5000 = 0
     private var isSoundSelectEnabled = true
 
@@ -168,12 +163,12 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
         play1.setOnClickListener {
             // play（ロードしたID, 左音量, 右音量, 優先度, ループ, 再生速度）
-            sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
+            sp.play(soundList[0], 1.0f, 1.0f, 0, 0, 1.0f)
         }
-        play2.setOnClickListener { sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f) }
-        play3.setOnClickListener { sp.play(sound3, 1.0f, 1.0f, 0, 0, 1.0f) }
-        play4.setOnClickListener { sp.play(sound4, 1.0f, 1.0f, 0, 0, 1.0f) }
-        play5.setOnClickListener { sp.play(sound5, 1.0f, 1.0f, 0, 0, 1.0f) }
+        play2.setOnClickListener { sp.play(soundList[1], 1.0f, 1.0f, 0, 0, 1.0f) }
+        play3.setOnClickListener { sp.play(soundList[2], 1.0f, 1.0f, 0, 0, 1.0f) }
+        play4.setOnClickListener { sp.play(soundList[3], 1.0f, 1.0f, 0, 0, 1.0f) }
+        play5.setOnClickListener { sp.play(soundList[4], 1.0f, 1.0f, 0, 0, 1.0f) }
 
         val runnable = object : Runnable {
             override fun run() {
@@ -191,55 +186,9 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
                     currentSound = playList[0].toString()
                     println("sound: ${currentSound}")
 
-//                    when (currentSound) {
-//                        "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "2" -> sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "3" -> sp.play(sound3, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "4" -> sp.play(sound4, 1.0f, 1.0f, 0, 0, 1.0f)
-//                        "5" -> sp.play(sound5, 1.0f, 1.0f, 0, 0, 1.0f)
-//                    }
-
                     //反応によって音量を変える
-                    when (currentSound) {
-                        "1" -> sp.play(sound1, sound_levels[0], sound_levels[0], 0, 0, 1.0f)
-                        "2" -> sp.play(sound2, sound_levels[1], sound_levels[1], 0, 0, 1.0f)
-                        "3" -> sp.play(sound3, sound_levels[2], sound_levels[2], 0, 0, 1.0f)
-                        "4" -> sp.play(sound4, sound_levels[3], sound_levels[3], 0, 0, 1.0f)
-                        "5" -> sp.play(sound5, sound_levels[4], sound_levels[4], 0, 0, 1.0f)
-                    }
-
-//                    //反応によってピッチを変える
-//                    when (currentSound) {
-//                        "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, pitch_levels[0])
-//                        "2" -> sp.play(sound2, 1.0f, 1.0f, 0, 0, pitch_levels[1])
-//                        "3" -> sp.play(sound3, 1.0f, 1.0f, 0, 0, pitch_levels[2])
-//                        "4" -> sp.play(sound4, 1.0f, 1.0f, 0, 0, pitch_levels[3])
-//                        "5" -> sp.play(sound5, 1.0f, 1.0f, 0, 0, pitch_levels[4])
-//                    }
-
-
-                    //学習時、音量を変える
-                    /*
-                    if(currentTarget.toString()==currentSound) {
-                        when (currentSound) {
-                            "1" -> sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f)
-                            "2" -> sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f)
-                            "3" -> sp.play(sound3, 1.0f, 1.0f, 0, 0, 1.0f)
-                            "4" -> sp.play(sound4, 1.0f, 1.0f, 0, 0, 1.0f)
-                            "5" -> sp.play(sound5, 1.0f, 1.0f, 0, 0, 1.0f)
-                        }
-                    }
-                    else{
-                        when (currentSound) {
-                            "1" -> sp.play(sound1, 0.01f, 0.01f, 0, 0, 1.0f)
-                            "2" -> sp.play(sound2, 0.01f, 0.01f, 0, 0, 1.0f)
-                            "3" -> sp.play(sound3, 0.01f, 0.01f, 0, 0, 1.0f)
-                            "4" -> sp.play(sound4, 0.01f, 0.01f, 0, 0, 1.0f)
-                            "5" -> sp.play(sound5, 0.01f, 0.01f, 0, 0, 1.0f)
-                        }
-
-                    }
-                    */
+                    val currentSoundInt = currentSound.toInt()-1
+                    sp.play(soundList[currentSoundInt], sound_levels[currentSoundInt], sound_levels[currentSoundInt], 0, 0, 1.0f)
 
                     nowPlaying(currentSound, nowPlayingImage!!, playerProgress!!)
                     playList.removeAt(0)
@@ -392,11 +341,11 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
         val status = getDirStatus(currentDataset)
         println(status)
 
-        status1.text = status.data1.toString() + " / 3"
-        status2.text = status.data2.toString() + " / 3"
-        status3.text = status.data3.toString() + " / 3"
-        status4.text = status.data4.toString() + " / 3"
-        status5.text = status.data5.toString() + " / 3"
+        status1.text = "${status.data1} / 3"
+        status2.text = "${status.data2} / 3"
+        status3.text = "${status.data3} / 3"
+        status4.text = "${status.data4} / 3"
+        status5.text = "${status.data5} / 3"
 
         currentTarget = getNextTarget(status)
         when (currentTarget) {
@@ -672,6 +621,12 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
 
     private fun loadSounds(soundSetID: Int) {
 
+        val sArray = mutableListOf(
+            mutableListOf(0, 0, 0, 0, 0),
+            mutableListOf(0, 0, 0, 0, 0),
+            mutableListOf(0, 0, 0, 0, 0)
+        )
+
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -682,35 +637,37 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
             .setMaxStreams(5)
             .build()
 
-        when (soundSetID) {
-            1 -> {
-                sound1 = sp.load(this, R.raw.s0_0, 1)
-                sound2 = sp.load(this, R.raw.s0_1, 1)
-                sound3 = sp.load(this, R.raw.s0_2, 1)
-                sound4 = sp.load(this, R.raw.s0_3, 1)
-                sound5 = sp.load(this, R.raw.s0_4, 1)
+        val dir = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}"
+        val part_path = "rrawslist.json"
+        val file = File(dir, part_path)
+
+        val reader = BufferedReader(FileReader(file))
+        val json = JSONObject(reader.readLines().joinToString())
+
+        println("json: $json")
+        println("RRawSList: ${json["RRawSList"]}")
+
+        val ex = json["RRawSList"].toString()
+        val exList = ex.substring(2..(ex.length-3)).split("], [").toMutableList()
+        for (i in 0 until 3) {
+            val partNewExList = exList[i].split(", ")
+            for (j in 0 until 5) {
+                sArray[i][j] = partNewExList[j].toInt()
             }
-            2 -> {
-                sound1 = sp.load(this, R.raw.s1_0, 1)
-                sound2 = sp.load(this, R.raw.s1_1, 1)
-                sound3 = sp.load(this, R.raw.s1_2, 1)
-                sound4 = sp.load(this, R.raw.s1_3, 1)
-                sound5 = sp.load(this, R.raw.s1_4, 1)
-            }
-            3 -> {
-                sound1 = sp.load(this, R.raw.s2_0, 1)
-                sound2 = sp.load(this, R.raw.s2_1, 1)
-                sound3 = sp.load(this, R.raw.s2_2, 1)
-                sound4 = sp.load(this, R.raw.s2_3, 1)
-                sound5 = sp.load(this, R.raw.s2_4, 1)
-            }
+        }
+        println("sArray: $sArray, is int: ${sArray[0][0] is Int}")
+
+        for (i in 0 until 5) {
+            soundList[i] = sp.load(this, sArray[soundSetID-1][i], 1)
         }
         sound5000 = sp.load(this, R.raw.s5000, 1)
 
         // ロードが終わったか確認
         sp.setOnLoadCompleteListener { sp, sampleId, status ->
-            //            Log.d("debug", "sampleId=$sampleId")
-//            Log.d("debug", "status=$status")
+            /*
+            Log.d("debug", "sampleId=$sampleId")
+            Log.d("debug", "status=$status")
+             */
         }
     }
 
@@ -744,18 +701,18 @@ class RecordActivity : AppCompatActivity(), neuroNicleService.Companion.NNListen
     override fun onCheckChanged(current: Checked?) {
 
         if (current.toString() == "LEFT") {
-            play1.setOnClickListener { sp.play(sound1, 0.05f, 0.05f, 0, 0, 1.0f) }
-            play2.setOnClickListener { sp.play(sound2, 0.05f, 0.05f, 0, 0, 1.0f) }
-            play3.setOnClickListener { sp.play(sound3, 0.05f, 0.05f, 0, 0, 1.0f) }
-            play4.setOnClickListener { sp.play(sound4, 0.05f, 0.05f, 0, 0, 1.0f) }
-            play5.setOnClickListener { sp.play(sound5, 0.05f, 0.05f, 0, 0, 1.0f) }
+            play1.setOnClickListener { sp.play(soundList[0], 0.05f, 0.05f, 0, 0, 1.0f) }
+            play2.setOnClickListener { sp.play(soundList[1], 0.05f, 0.05f, 0, 0, 1.0f) }
+            play3.setOnClickListener { sp.play(soundList[2], 0.05f, 0.05f, 0, 0, 1.0f) }
+            play4.setOnClickListener { sp.play(soundList[3], 0.05f, 0.05f, 0, 0, 1.0f) }
+            play5.setOnClickListener { sp.play(soundList[4], 0.05f, 0.05f, 0, 0, 1.0f) }
         }
         else {
-            play1.setOnClickListener { sp.play(sound1, 1.0f, 1.0f, 0, 0, 1.0f) }
-            play2.setOnClickListener { sp.play(sound2, 1.0f, 1.0f, 0, 0, 1.0f) }
-            play3.setOnClickListener { sp.play(sound3, 1.0f, 1.0f, 0, 0, 1.0f) }
-            play4.setOnClickListener { sp.play(sound4, 1.0f, 1.0f, 0, 0, 1.0f) }
-            play5.setOnClickListener { sp.play(sound5, 1.0f, 1.0f, 0, 0, 1.0f) }
+            play1.setOnClickListener { sp.play(soundList[0], 1.0f, 1.0f, 0, 0, 1.0f) }
+            play2.setOnClickListener { sp.play(soundList[1], 1.0f, 1.0f, 0, 0, 1.0f) }
+            play3.setOnClickListener { sp.play(soundList[2], 1.0f, 1.0f, 0, 0, 1.0f) }
+            play4.setOnClickListener { sp.play(soundList[3], 1.0f, 1.0f, 0, 0, 1.0f) }
+            play5.setOnClickListener { sp.play(soundList[4], 1.0f, 1.0f, 0, 0, 1.0f) }
         }
     }
 }

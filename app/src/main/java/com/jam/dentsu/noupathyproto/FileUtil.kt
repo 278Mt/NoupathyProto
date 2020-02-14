@@ -150,7 +150,6 @@ fun deleteFile(dir: String, name: String) {
 fun getSoundSetID(dir: String): Int {
 
     var sound_set_id = 1
-    var json = null
 
     val file = File("${Environment.getExternalStorageDirectory().path}/${APP_ROOT}/${dir}", "soundset.json")
 
@@ -190,10 +189,4 @@ fun setSoundSetID(dir: String, id: Int) {
         it.write(json.toString())
         it.flush()
     }
-}
-
-fun getUserID(): String {
-
-
-    return "0000"
 }

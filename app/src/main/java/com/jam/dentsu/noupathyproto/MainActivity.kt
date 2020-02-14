@@ -8,12 +8,15 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
+import java.io.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         checkPermission()
+
+        setRRawSList()
 
         // はじめに１つデータセットを作っておく
         if (getDirCount() == 0) {
@@ -140,7 +145,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+}
+
+fun setRRawSList(update: Boolean=false) {
     /*
-    ここを開いた時にNoupathy/soundset.jsonがなかったら新規作成、あったら読み込み
+    mainを開いた時にNoupathy/rrawslist.jsonがなかったら新規作成、あったら読み込み
      */
+    val dir = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}"
+    val part_path = "rrawslist.json"
+    val path = "${dir}/${part_path}"
+    val root = File(path)
+    val file = File(dir, part_path)
+
+    println("update: ${update}")
+
+    if (update || !root.exists()) {
+        println("create ${path}")
+        val json = JSONObject()
+        json.put("RRawSList", listOf(
+            listOf(R.raw.s0_0, R.raw.s0_1, R.raw.s0_2, R.raw.s0_3, R.raw.s0_4),
+            listOf(R.raw.s1_0, R.raw.s1_1, R.raw.s1_2, R.raw.s1_3, R.raw.s1_4),
+            listOf(R.raw.s2_0, R.raw.s2_1, R.raw.s2_2, R.raw.s2_3, R.raw.s2_4)
+        ))
+        println("json: ${json}")
+
+        val writer = BufferedWriter(FileWriter(file))
+        writer.use {
+            it.write(json.toString())
+            it.flush()
+        }
+
+        println("json file creation successful!!")
+
+    }
+    else {
+        println("found ${path}")
+
+        // read
+        val reader = BufferedReader(FileReader(file))
+        val json = JSONObject(reader.readLines().joinToString())
+        println("json: ${json}")
+    }
+
 }

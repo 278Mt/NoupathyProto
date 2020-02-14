@@ -6,7 +6,12 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import kotlinx.android.synthetic.main.activity_sound_select.*
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 
 class SoundSelectActivity : AppCompatActivity() {
 
@@ -32,9 +37,10 @@ class SoundSelectActivity : AppCompatActivity() {
             for (j in 0 until 5) {
                 soundBtnList[i][j].setOnClickListener {
                     val intent = Intent(this, PostSoundSelectActivity::class.java)
-                    intent.putExtra("soundNumArray", arrayOf(i, j))
-                    println(intent.getIntArrayExtra("soundNumArray"))
+                    intent.putExtra("soundNumString", "$i-$j")
+                    println("soundNumString: ${intent.getStringExtra("soundNumString")}")
                     startActivityForResult(intent, 1)
+                    loadSounds()
                 }
             }
         }
@@ -49,7 +55,7 @@ class SoundSelectActivity : AppCompatActivity() {
             }
         }
 
-        println("sound1_1 = ${sound1_1}")
+        println("sound1_1 = $sound1_1")
 
         val soundList = listOf(
             listOf(sound1_1, sound1_2, sound1_3, sound1_4, sound1_5),
@@ -76,17 +82,25 @@ class SoundSelectActivity : AppCompatActivity() {
             .setMaxStreams(5)
             .build()
 
-        var RRawSList = mutableListOf(
-            mutableListOf(R.raw.s0_0, R.raw.s0_1, R.raw.s0_2, R.raw.s0_3, R.raw.s0_4),
-            mutableListOf(R.raw.s1_0, R.raw.s1_1, R.raw.s1_2, R.raw.s1_3, R.raw.s1_4),
-            mutableListOf(R.raw.s2_0, R.raw.s2_1, R.raw.s2_2, R.raw.s2_3, R.raw.s2_4)
-        )
+        val dir = "${Environment.getExternalStorageDirectory().path}/${APP_ROOT}"
+        val part_path = "rrawslist.json"
+        val file = File(dir, part_path)
 
+        val reader = BufferedReader(FileReader(file))
+        val json = JSONObject(reader.readLines().joinToString())
+
+        println("json: $json")
+        println("RRawSList: ${json["RRawSList"]}")
+
+        val ex = json["RRawSList"].toString()
+        val exList = ex.substring(2..(ex.length-3)).split("], [").toMutableList()
         for (i in 0 until 3) {
+            val partNewExList = exList[i].split(", ")
             for (j in 0 until 5) {
-                sArray[i][j] = sp.load(this, RRawSList[i][j], 1)
+                println(partNewExList)
+                sArray[i][j] = sp.load(this, partNewExList[j].toInt(), 1)
             }
         }
-
+        println("sArray: $sArray, is int: ${sArray[0][0] is Int}")
     }
 }
